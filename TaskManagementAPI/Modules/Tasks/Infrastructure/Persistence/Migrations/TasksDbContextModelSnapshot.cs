@@ -52,6 +52,9 @@ namespace TaskManagementAPI.Modules.Tasks.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("TaskId");
 
+                    b.HasIndex("TaskId", "BlockedByTaskId")
+                        .HasDatabaseName("IX_TaskDependency_TaskId_BlockedByTaskId");
+
                     b.ToTable("TaskDependencies");
                 });
 
@@ -132,8 +135,7 @@ namespace TaskManagementAPI.Modules.Tasks.Infrastructure.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -158,7 +160,16 @@ namespace TaskManagementAPI.Modules.Tasks.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ProjectId");
 
+                    b.HasIndex("Slug")
+                        .HasDatabaseName("IX_WorkTask_Slug");
+
                     b.HasIndex("Status");
+
+                    b.HasIndex("ProjectId", "AssigneeId")
+                        .HasDatabaseName("IX_WorkTask_ProjectId_AssigneeId");
+
+                    b.HasIndex("ProjectId", "Status")
+                        .HasDatabaseName("IX_WorkTask_ProjectId_Status");
 
                     b.ToTable("Tasks");
                 });

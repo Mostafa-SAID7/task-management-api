@@ -5,6 +5,7 @@ using TaskManagementAPI;
 using TaskManagementAPI.Modules.Tasks.Application.DTOs;
 using TaskManagementAPI.Modules.Tasks.Domain.Enums;
 using TaskManagementAPI.Tests.Integration.Helpers;
+using TaskManagementAPI.Tests.Integration.Shared;
 using Xunit;
 using TaskStatus = TaskManagementAPI.Modules.Tasks.Domain.Enums.TaskStatus;
 using System.Text.Json;
@@ -14,28 +15,23 @@ namespace TaskManagementAPI.Tests.Integration.Modules.Tasks;
 /// <summary>
 /// Integration tests for the TasksController.
 /// </summary>
-public class TasksControllerIntegrationTests : IAsyncLifetime
+public class TasksControllerIntegrationTests : IClassFixture<TestWebApplicationFactory>
 {
-    private WebApplicationFactory<Program> _factory = null!;
-    private HttpClient _client = null!;
-    private string _jwtToken = null!;
+    private readonly TestWebApplicationFactory _factory;
+    private readonly HttpClient _client;
+    private readonly string _jwtToken;
 
-    public async Task InitializeAsync()
+    public TasksControllerIntegrationTests(TestWebApplicationFactory factory)
     {
-        _factory = new WebApplicationFactory<Program>();
-        _client = _factory.CreateClient();
+        _factory = factory;
+        _client = _factory.CreateClient(new WebApplicationFactoryClientOptions
+        {
+            AllowAutoRedirect = false
+        });
         
         // Generate JWT token for authenticated requests
         _jwtToken = JwtTokenHelper.GenerateToken();
         _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_jwtToken}");
-        
-        await Task.CompletedTask;
-    }
-
-    public async Task DisposeAsync()
-    {
-        _client.Dispose();
-        await _factory.DisposeAsync();
     }
 
     [Fact]

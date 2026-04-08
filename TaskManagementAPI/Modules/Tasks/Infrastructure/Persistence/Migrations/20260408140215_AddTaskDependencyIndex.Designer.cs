@@ -12,8 +12,8 @@ using TaskManagementAPI.Modules.Tasks.Infrastructure.Persistence;
 namespace TaskManagementAPI.Modules.Tasks.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(TasksDbContext))]
-    [Migration("20260408111550_InitialCreateTasks")]
-    partial class InitialCreateTasks
+    [Migration("20260408140215_AddTaskDependencyIndex")]
+    partial class AddTaskDependencyIndex
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,6 +54,9 @@ namespace TaskManagementAPI.Modules.Tasks.Infrastructure.Persistence.Migrations
                     b.HasIndex("BlockedByTaskId");
 
                     b.HasIndex("TaskId");
+
+                    b.HasIndex("TaskId", "BlockedByTaskId")
+                        .HasDatabaseName("IX_TaskDependency_TaskId_BlockedByTaskId");
 
                     b.ToTable("TaskDependencies");
                 });
@@ -134,6 +137,9 @@ namespace TaskManagementAPI.Modules.Tasks.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("ProjectId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Slug")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -157,7 +163,16 @@ namespace TaskManagementAPI.Modules.Tasks.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ProjectId");
 
+                    b.HasIndex("Slug")
+                        .HasDatabaseName("IX_WorkTask_Slug");
+
                     b.HasIndex("Status");
+
+                    b.HasIndex("ProjectId", "AssigneeId")
+                        .HasDatabaseName("IX_WorkTask_ProjectId_AssigneeId");
+
+                    b.HasIndex("ProjectId", "Status")
+                        .HasDatabaseName("IX_WorkTask_ProjectId_Status");
 
                     b.ToTable("Tasks");
                 });

@@ -11,6 +11,7 @@ erDiagram
     APPLICATION_USER ||--o{ PROJECT_MEMBER : "is member of"
     APPLICATION_USER ||--o{ WORK_TASK : "is assigned to"
     APPLICATION_USER ||--o{ TIME_TRACKING_ENTRY : "logs time"
+    APPLICATION_USER ||--o{ NOTIFICATION : "receives"
 
     PROJECT ||--o{ PROJECT_MEMBER : "contains"
     PROJECT ||--o{ WORK_TASK : "contains"
@@ -59,6 +60,15 @@ erDiagram
         string UserId
         decimal Hours
         DateTime Date
+    }
+
+    NOTIFICATION {
+        Guid Id
+        string UserId
+        string Message
+        int Type
+        bool IsRead
+        DateTime CreatedAt
     }
 
     APPLICATION_USER {

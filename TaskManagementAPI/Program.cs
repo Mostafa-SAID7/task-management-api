@@ -109,40 +109,29 @@ try
         var notificationsContext = scope.ServiceProvider.GetRequiredService<NotificationsDbContext>();
 
         // Using MigrateAsync to ensure correct tracking via __EFMigrationsHistory
-        try
+        // Skip if provider is in-memory (for tests)
+        if (projectsContext.Database.IsRelational())
         {
-            await projectsContext.Database.MigrateAsync();
-        }
-        catch (Exception ex)
-        {
-            Log.Warning(ex, "Error migrating ProjectsDbContext");
+            try { await projectsContext.Database.MigrateAsync(); }
+            catch (Exception ex) { Log.Warning(ex, "Error migrating ProjectsDbContext"); }
         }
 
-        try
+        if (tasksContext.Database.IsRelational())
         {
-            await tasksContext.Database.MigrateAsync();
-        }
-        catch (Exception ex)
-        {
-            Log.Warning(ex, "Error migrating TasksDbContext");
+            try { await tasksContext.Database.MigrateAsync(); }
+            catch (Exception ex) { Log.Warning(ex, "Error migrating TasksDbContext"); }
         }
 
-        try
+        if (usersContext.Database.IsRelational())
         {
-            await usersContext.Database.MigrateAsync();
-        }
-        catch (Exception ex)
-        {
-            Log.Warning(ex, "Error migrating UsersDbContext");
+            try { await usersContext.Database.MigrateAsync(); }
+            catch (Exception ex) { Log.Warning(ex, "Error migrating UsersDbContext"); }
         }
 
-        try
+        if (notificationsContext.Database.IsRelational())
         {
-            await notificationsContext.Database.MigrateAsync();
-        }
-        catch (Exception ex)
-        {
-            Log.Warning(ex, "Error migrating NotificationsDbContext");
+            try { await notificationsContext.Database.MigrateAsync(); }
+            catch (Exception ex) { Log.Warning(ex, "Error migrating NotificationsDbContext"); }
         }
     }
 }
@@ -183,18 +172,21 @@ defaultFilesOptions.DefaultFileNames.Add("index.html");
 app.UseDefaultFiles(defaultFilesOptions);
 app.UseStaticFiles();
 
-// Handle 404 errors for non-API routes
-app.Use(async (context, next) =>
+// Handle 404 errors for non-API routes (skip in Testing environment to avoid redirect issues)
+if (!app.Environment.IsEnvironment("Testing"))
 {
-    await next();
-    
-    // If response is 404 and not an API route, serve 404.html
-    if (context.Response.StatusCode == 404 && !context.Request.Path.StartsWithSegments("/api"))
+    app.Use(async (context, next) =>
     {
-        context.Request.Path = "/404.html";
         await next();
-    }
-});
+        
+        // If response is 404 and not an API route, serve 404.html
+        if (context.Response.StatusCode == 404 && !context.Request.Path.StartsWithSegments("/api"))
+        {
+            context.Request.Path = "/404.html";
+            await next();
+        }
+    });
+}
 
 app.Run();
 

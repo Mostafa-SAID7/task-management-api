@@ -11,6 +11,8 @@
 ### Infrastructure & DevOps Updates
 - ✅ **.NET 9.0 Migration**: All workflows and documentation updated to target the latest LTS platform.
 - ✅ **Conventional Commits**: Integrated `amannn/action-semantic-pull-request` to enforce semantic versioning.
+- ✅ **CI/CD Modernization**: Updated GitHub Actions to latest versions (v4/v5) for security and speed.
+- ✅ **Fail-Safe CD**: Implemented conditional Docker Hub login to prevent workflow failures when secrets are missing.
 - ✅ **Branch Protection**: Defined a robust strategy in `docs/BRANCH_PROTECTION.md` to safeguard the `main` branch.
 - ### 📁 GitHub Ecosystem (`.github/`)
 1. ✅ **.github/CODEOWNERS**

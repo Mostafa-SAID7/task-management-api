@@ -1,233 +1,89 @@
-# Getting Started - Task Management API
+# 🚀 Getting Started - Task Management API
 
-This guide will help you set up and run the Task Management API locally.
+Welcome to the **Task Management API**! This guide will walk you through setting up your environment and making your first API calls in minutes.
 
-## Prerequisites
+---
 
-- .NET 9.0 SDK or later
-- SQL Server 2019 or later (or Docker)
-- Visual Studio 2022 / VS Code
-- Git
+## 🛠️ Prerequisites
 
-## Installation
+Before you begin, ensure you have the following installed on your machine:
 
-### Option 1: Docker (Recommended)
+| Requirement | Version | Link |
+| :--- | :--- | :--- |
+| **.NET SDK** | 9.0+ | [Download](https://dotnet.microsoft.com/download/dotnet/9.0) |
+| **SQL Server** | 2019+ | [Download](https://www.microsoft.com/sql-server) |
+| **Docker** | Latest | [Download](https://www.docker.com/products/docker-desktop) |
+| **Git** | Latest | [Download](https://git-scm.com/downloads) |
 
-The easiest way to get started is using Docker Compose:
+---
+
+## 🏗️ Installation
+
+### Option 1: Docker Compose (Recommended)
+The fastest way to launch the full stack (API + Database).
 
 ```bash
-# Clone the repository
+# Clone and enter repository
 git clone https://github.com/Mostafa-SAID7/task-management-api.git
 cd task-management-api
 
-# Start the application
-docker-compose up -d
-
-# Wait for services to be healthy
-docker-compose ps
-
-# View logs
-docker-compose logs -f api
+# Spin up the infrastructure
+docker-compose up -d --build
 ```
 
-The API will be available at:
-- **API**: http://localhost:5000
-- **Swagger UI**: http://localhost:5000/swagger/index.html
-- **Database**: localhost:1433 (SQL Server)
+> [!TIP]
+> Use `docker-compose ps` to verify all services are running and healthy.
 
-### Option 2: Local Development
+### Option 2: Local .NET CLI
+For active development and debugging.
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Mostafa-SAID7/task-management-api.git
-   cd task-management-api
+1. **Clone the repo**: `git clone...`
+2. **Setup Database**: Update the `DefaultConnection` string in `TaskManagementAPI/appsettings.Development.json`.
+3. **Run Migrations**: 
+   ```powershell
+   dotnet ef database update --project TaskManagementAPI
+   ```
+4. **Launch API**:
+   ```powershell
+   dotnet run --project TaskManagementAPI
    ```
 
-2. **Install SQL Server**
-   - Download from [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
-   - Or use Docker: `docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=YourPassword123!" -p 1433:1433 mcr.microsoft.com/mssql/server:2022-latest`
+---
 
-3. **Configure connection string**
-   ```bash
-   # Edit TaskManagementAPI/appsettings.Development.json
-   {
-     "ConnectionStrings": {
-       "DefaultConnection": "Server=localhost;Database=TaskManagementAPI;User Id=sa;Password=YourPassword123!;TrustServerCertificate=true;"
-     }
-   }
-   ```
+## 🚦 Your First Integration
 
-4. **Restore and build**
-   ```bash
-   cd TaskManagementAPI
-   dotnet restore
-   dotnet build
-   ```
+Once the API is running at `http://localhost:5000`, follow these steps to test the end-to-end flow.
 
-5. **Run migrations and seed data**
-   ```bash
-   dotnet ef database update
-   ```
-
-6. **Start the application**
-   ```bash
-   dotnet run
-   ```
-
-The API will be available at http://localhost:5000
-
-## First Steps
-
-### 1. Access Swagger UI
-
-Open http://localhost:5000/swagger/index.html to explore the API.
-
-### 2. Register a User
-
+### 1. Account Creation
+Register a new administrative user to receive your secure credentials.
 ```bash
 curl -X POST http://localhost:5000/api/auth/register \
   -H "Content-Type: application/json" \
-  -d '{
-    "email": "user@example.com",
-    "password": "Password123!",
-    "fullName": "John Doe"
-  }'
+  -d '{"email": "admin@taskapi.net", "password": "Password123!", "fullName": "Admin User"}'
 ```
 
-### 3. Login
-
+### 2. Authentication
+Retrieve your JWT bearer token.
 ```bash
 curl -X POST http://localhost:5000/api/auth/login \
   -H "Content-Type: application/json" \
-  -d '{
-    "email": "user@example.com",
-    "password": "Password123!"
-  }'
+  -d '{"email": "admin@taskapi.net", "password": "Password123!"}'
 ```
 
-Response:
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "expiresIn": 3600
-}
-```
+### 3. Explore with Swagger
+Navigate to **`http://localhost:5000/swagger`** for a premium, interactive API explorer experience.
 
-### 4. Create a Project
+---
 
-```bash
-curl -X POST http://localhost:5000/api/projects \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "My First Project",
-    "description": "A test project"
-  }'
-```
+## 🧪 Documentation Vault
+Deep-dive into our technical resources:
+- 🧱 **[Architecture Guide](STRUCTURE.md)**
+- 🚦 **[Testing Strategy](TESTING.md)**
+- 📊 **[Relationship Diagram](ERD.md)**
 
-### 5. Create a Task
+---
 
-```bash
-curl -X POST http://localhost:5000/api/tasks \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "projectId": "PROJECT_ID",
-    "title": "First Task",
-    "description": "My first task",
-    "priority": "High",
-    "dueDate": "2026-12-31"
-  }'
-```
-
-## Configuration
-
-### Environment Variables
-
-Create a `.env` file in the root directory:
-
-```bash
-# Database
-ConnectionStrings__DefaultConnection=Server=localhost;Database=TaskManagementAPI;...
-
-# JWT
-Jwt__Secret=your-secret-key-here
-Jwt__Issuer=TaskManagementAPI
-Jwt__Audience=TaskManagementAPI
-Jwt__ExpirationMinutes=60
-
-# Logging
-Logging__LogLevel__Default=Information
-```
-
-### appsettings Files
-
-- `appsettings.json` - Default settings
-- `appsettings.Development.json` - Development overrides
-- `appsettings.Production.json` - Production settings
-
-## Running Tests
-
-### Unit Tests
-```bash
-dotnet test tests/TaskManagementAPI.Tests.Unit
-```
-
-### Integration Tests
-```bash
-dotnet test tests/TaskManagementAPI.Tests.Integration
-```
-
-### All Tests with Coverage
-```bash
-dotnet test /p:CollectCoverage=true /p:CoverageFormat=opencover
-```
-
-## Troubleshooting
-
-### Database Connection Issues
-
-**Error**: "Cannot connect to database"
-
-**Solution**:
-1. Verify SQL Server is running: `docker ps` (if using Docker)
-2. Check connection string in `appsettings.Development.json`
-3. Ensure database exists: `CREATE DATABASE TaskManagementAPI`
-
-### Port Already in Use
-
-**Error**: "Address already in use"
-
-**Solution**:
-```bash
-# Change port in appsettings.json
-"Kestrel": {
-  "Endpoints": {
-    "Http": {
-      "Url": "http://localhost:5001"
-    }
-  }
-}
-```
-
-### Docker Issues
-
-**Error**: "Cannot connect to Docker daemon"
-
-**Solution**:
-1. Ensure Docker is running
-2. On Windows: Start Docker Desktop
-3. On Linux: `sudo systemctl start docker`
-
-## Next Steps
-
-- Check [Development Guide](DEVELOPMENT.md)
-- Review [Contributing Guidelines](CONTRIBUTING.md)
-- Explore [Architecture Decisions](ADR/)
-
-## Support
-
-- **Issues**: [GitHub Issues](https://github.com/Mostafa-SAID7/task-management-api/issues)
-- **Documentation**: [docs/](.)
-
-
+## 👤 Support & Author
+**M.Said**  
+*Lead Architect*  
+[Portfolio](https://m-said-portfolio.netlify.app) | [GitHub](https://github.com/Mostafa-SAID7)

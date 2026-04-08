@@ -59,3 +59,10 @@ We leverage EF Core Connection Pooling to reuse database connections, significan
 We recommend using **BenchmarkDotNet** for micro-benchmarks and **k6** or **JMeter** for end-to-end load testing. 
 
 See our **[k6 example](../docs/TESTING.md#performance-testing)** for automated load testing scripts.
+
+---
+
+## 👤 Author & Optimization Engineering
+**M.Said**  
+*Lead Architect*  
+[Portfolio](https://m-said-portfolio.netlify.app) | [GitHub](https://github.com/Mostafa-SAID7)
