@@ -159,8 +159,8 @@ No previous versions exist. This is the initial release.
 ## Support
 
 For issues and feature requests, please visit:
-- [GitHub Issues](https://github.com/yourusername/task-management-api/issues)
-- [GitHub Discussions](https://github.com/yourusername/task-management-api/discussions)
+- [GitHub Issues](https://github.com/Mostafa-SAID7/task-management-api/issues)
+- [GitHub Discussions](https://github.com/Mostafa-SAID7/task-management-api/discussions)
 
 ---
 

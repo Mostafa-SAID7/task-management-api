@@ -1,50 +1,67 @@
 # 🎯 Task Management API
 
-A modular monolith API for efficient project and task management, built with .NET 9 and high-quality architectural standards.
+[![CI - Build and Test](https://github.com/Mostafa-SAID7/task-management-api/actions/workflows/ci.yml/badge.svg)](https://github.com/Mostafa-SAID7/task-management-api/actions/workflows/ci.yml)
+[![Docker - Build and Push](https://github.com/Mostafa-SAID7/task-management-api/actions/workflows/docker.yml/badge.svg)](https://github.com/Mostafa-SAID7/task-management-api/actions/workflows/docker.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 🚀 Overview
+A power-packed modular monolith API for efficient project and task management, meticulously crafted with **.NET 9** and modern architectural principles by **[M.Said](https://m-said-portfolio.netlify.app)**.
 
-The Task Management API is a production-ready system designed for scalability, maintainability, and real-time collaboration. It follows a vertical slice architecture combined with modular monolith principles to ensure clear separation of concerns.
+---
 
-### Key Features
-- **Project Management**: Create, update, and manage project lifecycles.
-- **Task Tracking**: Detailed task management with dependencies and time tracking.
-- **User Management**: Identity-based authentication and role-based access control.
-- **Real-time Updates**: SignalR-powered notifications for collaborative workflows.
-- **Soft Deletion**: Transparent data persistence with logic-based removals.
-- **Modular Monolith**: Each feature is isolated to prevent code entanglement.
+## 🚀 Vision
+The Task Management API is engineered for professional-grade project tracking, featuring high scalability, real-time collaboration, and a robust security model. By leveraging a **Modular Monolith** approach with **Vertical Slice Architecture**, we ensure that each feature is highly cohesive yet loosely coupled.
 
-## 🛠️ Tech Stack
-- **Backend**: ASP.NET Core 9.0
-- **Database**: SQL Server
-- **ORM**: Entity Framework Core
-- **Authentication**: ASP.NET Core Identity (JWT)
-- **Real-time**: SignalR
-- **Documentation**: Swagger/OpenAPI
+## ✨ Key Features
+- **🏗️ Project Management**: Complete lifecycle control for project portfolios.
+- **✅ Task Intelligence**: Smart task tracking with complex dependencies and blocking logic.
+- **🔐 Enterprise Security**: Identity-integrated JWT authentication with RBAC.
+- **⚡ Real-time Pulse**: Instant notifications and updates powered by SignalR.
+- **♻️ Data Resilience**: Advanced soft-deletion patterns with query-level filtering.
+- **📦 Clean Architecture**: Modular separation to prevent architectural decay.
 
-## 📚 Documentation
+## 🛠️ Technology Stack
+- **Core**: ASP.NET Core 9.0 (Modular Monolith)
+- **Database**: SQL Server + Entity Framework Core 9.0
+- **Auth**: ASP.NET Core Identity & JWT Bearer
+- **UX**: SignalR (Real-time), Swagger (API Docs)
+- **DevOps**: GitHub Actions, Docker, Docker Compose
 
-Detailed technical documentation is available in the `docs/` folder:
+## 📚 Technical Documentation
+Explore our deep-dive documentation in the `docs/` directory:
 
-- 🏗️ **[System Structure](docs/STRUCTURE.md)**: Project organization and duplicate check results.
-- 💻 **[Development Guide](docs/DEVELOPMENT.md)**: Coding standards, setup guide, and workflows.
-- 🏛️ **[Architecture Decisions (ADRs)](docs/ADR/)**: Record of important architectural decisions.
-- 🚀 **[Getting Started](docs/GETTING_STARTED.md)**: Quick setup and first steps.
-- 📊 **[API Specification](http://localhost:5120/swagger/index.html)**: Interactive Swagger UI.
+- 🏗️ **[System Architecture](docs/STRUCTURE.md)**: Modular design and structural integrity.
+- 💻 **[Development Portal](docs/DEVELOPMENT.md)**: Standards, setup, and contribution workflows.
+- 🚦 **[Branch & CI Strategy](docs/BRANCH_PROTECTION.md)**: Repository management and quality gates.
+- 📊 **[Data Architecture](docs/ERD.md)**: Entity Relationship Diagram.
+- 🛡️ **[Security Policy](.github/SECURITY.md)**: Safety and reporting standards.
+- 🚀 **[Performance Optimization](docs/PERFORMANCE.md)**: Speed and efficiency guide.
+- 📜 **[Release Notes](docs/CHANGELOG.md)**: Project history and semver.
 
 ## 🚦 Getting Started
 
 ### Prerequisites
 - .NET 9.0 SDK
-- SQL Server
+- Docker & Docker Compose (Optional)
+- SQL Server (Local or Containerized)
 
-### Installation
-1. Clone the repository.
-2. Update connection strings in `TaskManagementAPI/appsettings.json`.
-3. Run migrations and start the application:
+### Quick Setup
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Mostafa-SAID7/task-management-api.git
+   ```
+2. **Configure Database**: Update strings in `TaskManagementAPI/appsettings.json`.
+3. **Run the API**:
    ```bash
    dotnet run --project TaskManagementAPI
    ```
 
+## 🤝 Contributing
+Contributions are what make the open-source community an amazing place! Please see our **[CONTRIBUTING.md](.github/CONTRIBUTING.md)** for details on our code of conduct and the process for submitting pull requests.
+
+## 👤 Author
+**M.Said**
+- Portfolio: [m-said-portfolio.netlify.app](https://m-said-portfolio.netlify.app)
+- GitHub: [@Mostafa-SAID7](https://github.com/Mostafa-SAID7)
+
 ## 📜 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Licensed under the [MIT License](LICENSE).

@@ -417,16 +417,17 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-dotnet@v3
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '9.0.x'
     
     - run: dotnet test /p:CollectCoverage=true
     
-    - uses: codecov/codecov-action@v3
+    - uses: codecov/codecov-action@v4
       with:
         files: ./coverage.opencover.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
 ```
 
 ## Performance Testing

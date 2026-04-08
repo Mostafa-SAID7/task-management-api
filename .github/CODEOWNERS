@@ -2,31 +2,31 @@
 # This file defines who should review pull requests for different parts of the codebase
 
 # Default owners for all files
-* @yourusername
+* @Mostafa-SAID7
 
 # Projects Module
-TaskManagementAPI/Modules/Projects/ @yourusername
+TaskManagementAPI/Modules/Projects/ @Mostafa-SAID7
 
 # Tasks Module
-TaskManagementAPI/Modules/Tasks/ @yourusername
+TaskManagementAPI/Modules/Tasks/ @Mostafa-SAID7
 
 # Users Module
-TaskManagementAPI/Modules/Users/ @yourusername
+TaskManagementAPI/Modules/Users/ @Mostafa-SAID7
 
 # Notifications Module
-TaskManagementAPI/Modules/Notifications/ @yourusername
+TaskManagementAPI/Modules/Notifications/ @Mostafa-SAID7
 
 # Shared Infrastructure
-TaskManagementAPI/Shared/ @yourusername
+TaskManagementAPI/Shared/ @Mostafa-SAID7
 
 # Tests
-tests/ @yourusername
+tests/ @Mostafa-SAID7
 
 # Documentation
-docs/ @yourusername
-README.md @yourusername
+docs/ @Mostafa-SAID7
+README.md @Mostafa-SAID7
 
 # DevOps
-Dockerfile @yourusername
-docker-compose.yml @yourusername
-.github/ @yourusername
+Dockerfile @Mostafa-SAID7
+docker-compose.yml @Mostafa-SAID7
+.github/ @Mostafa-SAID7

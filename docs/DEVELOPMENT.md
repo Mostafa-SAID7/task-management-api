@@ -6,16 +6,15 @@ This guide covers local development setup and workflows.
 
 ### Prerequisites
 
-- .NET 8 SDK
+- .NET 9.0 SDK
 - Visual Studio 2022 or VS Code
 - SQL Server 2019+ or Docker
 - Git
 
 ### Initial Setup
 
-1. **Clone repository**
    ```bash
-   git clone https://github.com/yourusername/task-management-api.git
+   git clone https://github.com/Mostafa-SAID7/task-management-api.git
    cd task-management-api
    ```
 
@@ -430,16 +429,25 @@ lsof -i :5000
 kill -9 <PID>
 ```
 
-## Best Practices
+## Commit Messages & Versioning
 
-1. **Keep commits small** - One feature per commit
-2. **Write tests first** - TDD approach
-3. **Document changes** - Update docs and comments
-4. **Follow conventions** - Use established patterns
-5. **Review code** - Get peer review before merging
-6. **Test locally** - Run all tests before pushing
-7. **Update dependencies** - Keep packages current
+### Conventional Commits
+We enforce [Conventional Commits](https://www.conventionalcommits.org/) to maintain a clean and readable project history:
+- `feat`: A new feature
+- `fix`: A bug fix
+- `docs`: Documentation only changes
+- `refactor`: A code change that neither fixes a bug nor adds a feature
+- `perf`: A code change that improves performance
+- `test`: Adding missing tests or correcting existing tests
+- `chore`: Changes to the build process or auxiliary tools
 
+### Semantic Versioning
+This project follows [Semantic Versioning (SemVer) 2.0.0](https://semver.org/):
+- **MAJOR** version for incompatible API changes
+- **MINOR** version for functionality in a backwards compatible manner
+- **PATCH** version for backwards compatible bug fixes
+
+---
 
 ## Resources
 

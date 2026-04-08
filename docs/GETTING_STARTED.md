@@ -4,7 +4,7 @@ This guide will help you set up and run the Task Management API locally.
 
 ## Prerequisites
 
-- .NET 8 SDK or later
+- .NET 9.0 SDK or later
 - SQL Server 2019 or later (or Docker)
 - Visual Studio 2022 / VS Code
 - Git
@@ -17,7 +17,7 @@ The easiest way to get started is using Docker Compose:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/task-management-api.git
+git clone https://github.com/Mostafa-SAID7/task-management-api.git
 cd task-management-api
 
 # Start the application
@@ -39,7 +39,7 @@ The API will be available at:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/task-management-api.git
+   git clone https://github.com/Mostafa-SAID7/task-management-api.git
    cd task-management-api
    ```
 
@@ -227,7 +227,7 @@ dotnet test /p:CollectCoverage=true /p:CoverageFormat=opencover
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/task-management-api/issues)
+- **Issues**: [GitHub Issues](https://github.com/Mostafa-SAID7/task-management-api/issues)
 - **Documentation**: [docs/](.)
 
 
