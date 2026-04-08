@@ -1,6 +1,4 @@
-using Microsoft.EntityFrameworkCore;
 using TaskManagementAPI.Shared.Domain;
-using TaskManagementAPI.Shared.Domain.Interfaces;
 
 namespace TaskManagementAPI.Shared.Infrastructure.Repositories;
 

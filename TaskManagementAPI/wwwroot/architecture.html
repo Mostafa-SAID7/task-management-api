@@ -23,7 +23,7 @@
                         <li><a href="api-docs.html">API Docs</a></li>
                         <li><a href="architecture.html" class="active">Architecture</a></li>
                         <li><a href="features.html">Features</a></li>
-                        <li><a href="http://localhost:5120/swagger" target="_blank">Swagger UI</a></li>
+                        <li><a href="/swagger" target="_blank">Swagger UI</a></li>
                     </ul>
                 </nav>
             </div>
@@ -39,6 +39,9 @@
                         <div class="sidebar-title">Core Architecture</div>
                         <a href="#overview" class="sidebar-link active">
                             <i class="fas fa-sitemap"></i> Overview
+                        </a>
+                        <a href="#modular" class="sidebar-link">
+                            <i class="fas fa-cubes"></i> Modular Monolith
                         </a>
                         <a href="#layers" class="sidebar-link">
                             <i class="fas fa-layer-group"></i> Clean Architecture
@@ -63,98 +66,103 @@
                     <section id="overview">
                         <h2><i class="fas fa-sitemap"></i> Architecture Overview</h2>
                         <p class="subtitle">Understanding the design and inner workings of the Task Management API</p>
-                        <p>The Task Management API is built using <strong>Clean Architecture</strong> principles. This ensures the business logic remains independent of frameworks, UI, and external databases, making the system highly testable and maintainable.</p>
+                        <p>The Task Management API is built using <strong>Modular Monolith</strong> and <strong>Clean Architecture</strong> principles. This ensures that features are logically separated into independent modules while sharing a common infrastructure, making the system highly testable, maintainable, and ready for future scaling.</p>
 
                         <div class="callout">
                             <div class="callout-title">
                                 <i class="fas fa-lightbulb"></i> Architectural Goal
                             </div>
-                            <p>Our primary goal is to provide a scalable foundation that can support thousands of concurrent users while maintaining strict data integrity and performant response times.</p>
+                            <p>Our primary goal is to provide a scalable foundation where each domain (Users, Projects, Tasks) is encapsulated, reducing complexity and allowing teams to work independently on different modules.</p>
+                        </div>
+                    </section>
+
+                    <section id="modular">
+                        <h2><i class="fas fa-cubes"></i> Modular Structure</h2>
+                        <p>The system is divided into four primary modules, each responsible for a specific business domain:</p>
+                        <div class="features-grid">
+                            <div class="feature-card project-card">
+                                <h4>Users & Auth</h4>
+                                <p>Identity management, JWT issuance, and RBAC security.</p>
+                            </div>
+                            <div class="feature-card project-card">
+                                <h4>Projects</h4>
+                                <p>Workspace organization, naming, and team membership.</p>
+                            </div>
+                            <div class="feature-card project-card">
+                                <h4>Tasks</h4>
+                                <p>Task lifecycle, dependencies, and time tracking entries.</p>
+                            </div>
+                            <div class="feature-card project-card">
+                                <h4>Notifications</h4>
+                                <p>Real-time updates and historical alert management.</p>
+                            </div>
                         </div>
                     </section>
 
                     <section id="layers">
-                        <h2><i class="fas fa-layer-group"></i> Layered Design</h2>
-                        <p>The solution is organized into four distinct layers, following the Onion Architecture pattern:</p>
+                        <h2><i class="fas fa-layer-group"></i> Layered Design (Clean Architecture)</h2>
+                        <p>Each module follows a structured layering strategy to separate concerns:</p>
 
                         <div class="features-grid">
-                            <div class="feature-card">
+                            <div class="feature-card project-card">
                                 <span class="feature-icon"><i class="fas fa-desktop"></i></span>
                                 <h4>Presentation Layer</h4>
-                                <p>The API project itself. Handles HTTP requests, authentication, and global error handling.</p>
+                                <p>Handles API entry points and response formatting.</p>
                                 <ul class="feature-list">
-                                    <li>Controllers & Minimal APIs</li>
-                                    <li>Middleware Components</li>
-                                    <li>Swagger Documentation</li>
-                                    <li>SignalR Hubs</li>
+                                    <li>Controllers (REST Endpoints)</li>
+                                    <li>Middleware & Auth filters</li>
+                                    <li>Swagger Spec documentation</li>
                                 </ul>
                             </div>
 
-                            <div class="feature-card">
+                            <div class="feature-card project-card">
                                 <span class="feature-icon"><i class="fas fa-project-diagram"></i></span>
                                 <h4>Application Layer</h4>
-                                <p>Contains all business use cases, MediatR handlers, and request validation logic.</p>
+                                <p>Contains service logic and domain orchestration.</p>
                                 <ul class="feature-list">
-                                    <li>Commands & Queries</li>
-                                    <li>DTOs & Mappings</li>
-                                    <li>Fluent Validators</li>
-                                    <li>Domain Event Handlers</li>
+                                    <li>Services & Operations</li>
+                                    <li>Request Models & DTOs</li>
+                                    <li>Fluent Validation logic</li>
                                 </ul>
                             </div>
 
-                            <div class="feature-card">
+                            <div class="feature-card project-card">
                                 <span class="feature-icon"><i class="fas fa-database"></i></span>
                                 <h4>Infrastructure Layer</h4>
-                                <p>Implements data access, external service integrations, and cross-cutting concerns.</p>
+                                <p>Persistence implementations and external services.</p>
                                 <ul class="feature-list">
-                                    <li>EF Core Context</li>
-                                    <li>Repositories & Unit of Work</li>
-                                    <li>Redis Caching</li>
-                                    <li>Email/SMS Services</li>
+                                    <li>Module-specific DbContexts</li>
+                                    <li>Entity configurations</li>
+                                    <li>Redis caching providers</li>
                                 </ul>
                             </div>
 
-                            <div class="feature-card">
+                            <div class="feature-card project-card">
                                 <span class="feature-icon"><i class="fas fa-cube"></i></span>
                                 <h4>Domain Layer</h4>
-                                <p>The core of the system. Contains entities, value objects, and domain exceptions.</p>
+                                <p>The pure heart of the module's business logic.</p>
                                 <ul class="feature-list">
-                                    <li>Entities</li>
-                                    <li>Domain Events</li>
+                                    <li>Core Entities</li>
+                                    <li>Domain Events & Exceptions</li>
                                     <li>Value Objects</li>
-                                    <li>Core Interfaces</li>
                                 </ul>
                             </div>
-                        </div>
-
-                        <h3>Dependency Direction</h3>
-                        <div class="docbox">
-                            <pre><code>Presentation Layer (API)
-            ↓
-Application Layer (Logic)
-            ↓
-Infrastructure Layer (Data)
-            ↑
-  Domain Layer (Entities)</code></pre>
                         </div>
                     </section>
 
                     <section id="patterns">
                         <h2><i class="fas fa-puzzle-piece"></i> Design Patterns</h2>
 
-                        <h3>CQRS Pattern</h3>
-                        <p>We use <strong>Command Query Responsibility Segregation</strong> to separate read and write operations, allowing for optimized data models and better scaling.</p>
-                        <ul>
-                            <li><strong>Commands:</strong> Change system state (e.g., CreateTask, AssignMember).</li>
-                            <li><strong>Queries:</strong> Retrieve data without side effects (e.g., GetProjectDetails).</li>
-                        </ul>
+                        <h3>Service Layer Pattern</h3>
+                        <p>We use dedicated services to encapsulate business logic, ensuring that controllers remain thin and only handle request routing.</p>
 
-                        <h3>Repository & Unit of Work</h3>
-                        <p>Abstracts data access and ensures multiple operations are treated as a single atomic transaction.</p>
+                        <h3>Modular Database Contexts</h3>
+                        <p>Each module has its own <code>DbContext</code> and migrations, allowing for clear data boundaries and database-level separation if needed.</p>
 
-                        <h3>Strategy Pattern</h3>
-                        <p>Used for flexible notification delivery and dynamic priority calculations.</p>
+                        <h3>Repository Pattern</h3>
+                        <p>Abstracts complex data access logic, providing a clean interface for the application layer to interact with data entities.</p>
                     </section>
+
 
                     <section id="technologies">
                         <h2><i class="fas fa-cogs"></i> Technology Stack</h2>
@@ -201,9 +209,11 @@ Infrastructure Layer (Data)
                     <p>&copy; <span class="current-year"></span> Task Management API. All rights reserved.</p>
                 </div>
                 <div class="footer-right">
-                    <a href="terms.html">Terms of Service</a> | 
-                    <a href="license.html">License</a> | 
-                    <a href="http://localhost:5120/swagger" target="_blank">Swagger</a>
+                    <p>
+                        <a href="terms.html">Terms of Service</a> | 
+                        <a href="license.html">License</a> | 
+                        <a href="/swagger" target="_blank">Swagger UI</a>
+                    </p>
                 </div>
             </div>
         </footer>

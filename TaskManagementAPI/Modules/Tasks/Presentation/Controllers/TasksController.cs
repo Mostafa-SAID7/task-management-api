@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using TaskManagementAPI.Modules.Tasks.Application.DTOs;
 using TaskManagementAPI.Modules.Tasks.Application.Services;
 using TaskManagementAPI.Modules.Tasks.Domain.Enums;
@@ -132,7 +130,7 @@ public class TasksController : ControllerBase
     [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async System.Threading.Tasks.Task<ActionResult<TaskListResponse>> GetProjectTasks(
+    public async Task<ActionResult<TaskListResponse>> GetProjectTasks(
         Guid projectId,
         [FromQuery] TaskManagementAPI.Modules.Tasks.Domain.Enums.TaskStatus? status = null,
         [FromQuery] TaskPriority? priority = null,

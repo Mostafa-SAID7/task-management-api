@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using TaskManagementAPI.Modules.Users.Application.DTOs;
 using TaskManagementAPI.Modules.Users.Application.Services;
 using TaskManagementAPI.Modules.Users.Domain.Entities;

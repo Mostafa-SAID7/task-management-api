@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using TaskManagementAPI.Shared.Domain;
 
 namespace TaskManagementAPI.Shared.Infrastructure;

@@ -1,12 +1,8 @@
-using Serilog;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using TaskManagementAPI.Shared.Infrastructure.Configuration;
-using TaskManagementAPI.Shared.Infrastructure.DependencyInjection;
 using TaskManagementAPI.Shared.Infrastructure.Authorization;
 using TaskManagementAPI.Modules.Projects.Configuration;
 using TaskManagementAPI.Modules.Tasks.Configuration;
@@ -141,15 +137,14 @@ catch (Exception ex)
 }
 
 // Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
+// Configure the HTTP request pipeline
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Task Management API v1");
-        c.RoutePrefix = "swagger";
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Task Management API v1");
+    c.RoutePrefix = "swagger";
+});
+
 
 app.MapControllers();
 app.UseSharedMiddleware();

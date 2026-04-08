@@ -1,5 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
-using TaskManagementAPI.Shared.Domain.Interfaces;
 using TaskManagementAPI.Shared.Infrastructure.Middleware;
 using TaskManagementAPI.Shared.Infrastructure.Services;
 
