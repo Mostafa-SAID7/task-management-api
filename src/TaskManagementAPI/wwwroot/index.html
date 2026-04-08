@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management API - Documentation</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="bg-atmosphere"></div>
+    <div class="container">
+        <header>
+            <div class="header-container">
+                <a href="index.html" class="logo-section">
+                    <img src="images/logo.png" alt="Task Management API Logo" class="logo-image">
+                    <span class="brand-name">Task Management API</span>
+                </a>
+                <nav class="navbar">
+                    <ul>
+                        <li><a href="index.html" class="active">Overview</a></li>
+                        <li><a href="api-docs.html">API Docs</a></li>
+                        <li><a href="architecture.html">Architecture</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="http://localhost:5120/swagger" target="_blank">Swagger UI</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero-section">
+                <h1 class="hero-title">Task Management API</h1>
+                <p class="hero-subtitle">A modern, scalable REST API for managing projects, tasks, and team collaboration</p>
+                <div class="home-buttons">
+                    <a href="api-docs.html" class="home-btn">
+                        <i class="fas fa-code"></i> Explore API
+                    </a>
+                    <a href="http://localhost:5120/swagger" target="_blank" class="home-btn home-btn-secondary">
+                        <i class="fas fa-flask"></i> Try Swagger
+                    </a>
+                </div>
+            </section>
+
+            <section class="doc-layout">
+                <aside class="doc-sidebar">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search documentation...">
+                    </div>
+                    <div class="sidebar-nav">
+                        <div class="sidebar-title">Getting Started</div>
+                        <a href="#overview" class="sidebar-link active">
+                            <i class="fas fa-home"></i> Overview
+                        </a>
+                        <a href="#quick-start" class="sidebar-link">
+                            <i class="fas fa-rocket"></i> Quick Start
+                        </a>
+                        <a href="#authentication" class="sidebar-link">
+                            <i class="fas fa-lock"></i> Authentication
+                        </a>
+                        <div class="sidebar-title" style="margin-top: 30px;">Documentation</div>
+                        <a href="api-docs.html" class="sidebar-link">
+                            <i class="fas fa-code"></i> API Endpoints
+                        </a>
+                        <a href="architecture.html" class="sidebar-link">
+                            <i class="fas fa-sitemap"></i> Architecture
+                        </a>
+                        <a href="features.html" class="sidebar-link">
+                            <i class="fas fa-star"></i> Features
+                        </a>
+                        <div class="sidebar-title" style="margin-top: 30px;">Legal</div>
+                        <a href="terms.html" class="sidebar-link">
+                            <i class="fas fa-file-contract"></i> Terms of Service
+                        </a>
+                        <a href="license.html" class="sidebar-link">
+                            <i class="fas fa-certificate"></i> License
+                        </a>
+                    </div>
+                </aside>
+
+                <div class="doc-content">
+                    <section id="overview">
+                        <h2><i class="fas fa-home"></i> Overview</h2>
+                        <p class="subtitle">Welcome to the Task Management API documentation. This comprehensive guide will help you integrate with our powerful REST API for project and task management.</p>
+                        
+                        <div class="callout">
+                            <div class="callout-title">
+                                <i class="fas fa-info-circle"></i> API Base URL
+                            </div>
+                            <code>http://localhost:5120/api</code>
+                        </div>
+
+                        <h3>What is the Task Management API?</h3>
+                        <p>The Task Management API is a modern, production-ready REST API built with .NET 8 and ASP.NET Core following clean architecture principles. It provides comprehensive endpoints for managing projects, tasks, team members, real-time notifications, and user authentication.</p>
+
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li><strong>Project Management:</strong> Create, update, and manage projects with team members</li>
+                            <li><strong>Task Management:</strong> Organize tasks with priorities, dependencies, and time tracking</li>
+                            <li><strong>Real-time Updates:</strong> SignalR integration for live notifications and updates</li>
+                            <li><strong>JWT Authentication:</strong> Secure token-based authentication and authorization</li>
+                            <li><strong>Role-based Access:</strong> Fine-grained permission control with multiple roles</li>
+                            <li><strong>Soft Delete:</strong> Safe data deletion with restoration capabilities</li>
+                            <li><strong>Audit Logging:</strong> Complete audit trail for compliance and tracking</li>
+                        </ul>
+
+                        <h3>Core Modules</h3>
+                        <div class="getting-started-grid">
+                            <div class="getting-started-card">
+                                <h3><i class="fas fa-folder"></i> Projects Module</h3>
+                                <p>Manage projects and team members with role-based access control.</p>
+                                <ul>
+                                    <li>Create and manage projects</li>
+                                    <li>Add team members with roles</li>
+                                    <li>Track project status</li>
+                                </ul>
+                            </div>
+                            <div class="getting-started-card">
+                                <h3><i class="fas fa-tasks"></i> Tasks Module</h3>
+                                <p>Organize and track tasks with priorities and dependencies.</p>
+                                <ul>
+                                    <li>Create tasks with priorities</li>
+                                    <li>Manage task dependencies</li>
+                                    <li>Track time entries</li>
+                                </ul>
+                            </div>
+                            <div class="getting-started-card">
+                                <h3><i class="fas fa-bell"></i> Notifications Module</h3>
+                                <p>Real-time notifications and updates via SignalR.</p>
+                                <ul>
+                                    <li>Task assignments</li>
+                                    <li>Status changes</li>
+                                    <li>Due date alerts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="quick-start">
+                        <h2><i class="fas fa-rocket"></i> Quick Start</h2>
+                        <p>Get up and running with the Task Management API in minutes.</p>
+
+                        <h3>1. Authentication</h3>
+                        <p>First, register a new user or login to get your JWT token:</p>
+                        <div class="docbox docbox-http">
+                            <pre><code>POST /api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "SecurePass123!",
+  "firstName": "John",
+  "lastName": "Doe"
+}</code></pre>
+                        </div>
+
+                        <h3>2. Create a Project</h3>
+                        <p>Create your first project:</p>
+                        <div class="docbox docbox-http">
+                            <pre><code>POST /api/projects
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "name": "My First Project",
+  "description": "A project for managing tasks"
+}</code></pre>
+                        </div>
+
+                        <h3>3. Create a Task</h3>
+                        <p>Add tasks to your project:</p>
+                        <div class="docbox docbox-http">
+                            <pre><code>POST /api/tasks
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "projectId": "project-id",
+  "title": "Implement feature",
+  "description": "Build the new feature",
+  "priority": "High",
+  "dueDate": "2026-04-15"
+}</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="authentication">
+                        <h2><i class="fas fa-lock"></i> Authentication</h2>
+                        <p>The Task Management API uses JWT (JSON Web Tokens) for authentication. All requests to protected endpoints must include a valid JWT token in the Authorization header.</p>
+
+                        <h3>Getting a Token</h3>
+                        <p>Send your credentials to the login endpoint:</p>
+                        <div class="docbox docbox-http">
+                            <pre><code>POST /api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "SecurePass123!"
+}</code></pre>
+                        </div>
+
+                        <h3>Using the Token</h3>
+                        <p>Include the token in the Authorization header for all subsequent requests:</p>
+                        <div class="docbox docbox-http">
+                            <pre><code>GET /api/projects
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</code></pre>
+                        </div>
+
+                        <h3>Token Expiration</h3>
+                        <p>Tokens expire after 1 hour. When a token expires, you'll receive a 401 Unauthorized response. Simply login again to get a new token.</p>
+                    </section>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2026 Task Management API. All rights reserved.</p>
+                </div>
+                <div class="footer-right">
+                    <p>
+                        <a href="terms.html">Terms of Service</a> | 
+                        <a href="license.html">License</a> | 
+                        <a href="http://localhost:5120/swagger" target="_blank">API Documentation</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+                            <li><strong>Caching:</strong> Redis-backed caching for optimal performance</li>
+                            <li><strong>Logging:</strong> Comprehensive structured logging with Serilog</li>
+                            <li><strong>Performance Monitoring:</strong> Real-time performance metrics</li>
+                            <li><strong>Error Handling:</strong> Consistent error responses with detailed messages</li>
+                            <li><strong>Pagination:</strong> Efficient data retrieval with pagination support</li>
+                            <li><strong>Docker Support:</strong> Ready for containerized deployment</li>
+                        </ul>
+                    </section>
+
+                    <section id="quick-start">
+                        <h2><i class="fas fa-rocket"></i> Quick Start</h2>
+                        <p>Get up and running with the Bookstore API in minutes.</p>
+
+                        <h3>1. Installation</h3>
+                        <div class="getting-started-grid">
+                            <div class="getting-started-card">
+                                <h3><i class="fas fa-download"></i> Clone Repository</h3>
+                                <code>git clone https://github.com/yourusername/bookstore-api.git</code>
+                                <code>cd bookstore-api</code>
+                            </div>
+                            <div class="getting-started-card">
+                                <h3><i class="fas fa-cube"></i> Docker Setup</h3>
+                                <code>docker-compose up -d</code>
+                                <p>This starts all services: API, SQL Server, Redis, and Seq</p>
+                            </div>
+                            <div class="getting-started-card">
+                                <h3><i class="fas fa-cogs"></i> Manual Setup</h3>
+                                <code>dotnet restore</code>
+                                <code>dotnet build</code>
+                                <code>dotnet run</code>
+                            </div>
+                        </div>
+
+                        <h3>2. First Request</h3>
+                        <div class="docbox docbox-http">
+                            <pre><code><span class="status-code">GET</span> /api/books HTTP/1.1
+Host: online-bookstore-api.runasp.net
+Accept: application/json</code></pre>
+                        </div>
+
+                        <h3>3. Response</h3>
+                        <div class="docbox">
+                            <pre><code>{
+  "items": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "isbn": "978-0743273565",
+      "price": 12.99,
+      "stockQuantity": 50
+    }
+  ],
+  "pageNumber": 1,
+  "pageSize": 10,
+  "totalCount": 1
+}</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="authentication">
+                        <h2><i class="fas fa-lock"></i> Authentication</h2>
+                        <p>The API uses JWT (JSON Web Tokens) for authentication. All protected endpoints require a valid token in the Authorization header.</p>
+
+                        <h3>Getting a Token</h3>
+                        <div class="docbox docbox-http">
+                            <pre><code><span class="status-code">POST</span> /api/auth/login HTTP/1.1
+Host: online-bookstore-api.runasp.net
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "SecurePassword123!"
+}</code></pre>
+                        </div>
+
+                        <h3>Using the Token</h3>
+                        <div class="docbox docbox-http">
+                            <pre><code><span class="status-code">GET</span> /api/orders HTTP/1.1
+Host: online-bookstore-api.runasp.net
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Accept: application/json</code></pre>
+                        </div>
+
+                        <div class="callout">
+                            <div class="callout-title">
+                                <i class="fas fa-lightbulb"></i> Token Expiration
+                            </div>
+                            <p>Tokens expire after 24 hours. Use the refresh endpoint to get a new token without re-authenticating.</p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2><i class="fas fa-link"></i> Quick Links</h2>
+                        <div class="doc-links">
+                            <a href="endpoints.html" class="doc-link">
+                                <h3><i class="fas fa-code"></i> API Endpoints</h3>
+                                <p>Explore all available endpoints with examples</p>
+                            </a>
+                            <a href="architecture.html" class="doc-link">
+                                <h3><i class="fas fa-sitemap"></i> Architecture</h3>
+                                <p>Understand the system design and structure</p>
+                            </a>
+                            <a href="features.html" class="doc-link">
+                                <h3><i class="fas fa-star"></i> Features</h3>
+                                <p>Learn about key features and capabilities</p>
+                            </a>
+                            <a href="http://online-bookstore-api.runasp.net/swagger" target="_blank" class="doc-link">
+                                <h3><i class="fas fa-flask"></i> Swagger UI</h3>
+                                <p>Interactive API documentation and testing</p>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2024 Online Bookstore API. All rights reserved.</p>
+                </div>
+                <div class="footer-right">
+                    <a href="terms.html">Terms of Service</a> | 
+                    <a href="license.html">License</a> | 
+                    <a href="http://online-bookstore-api.runasp.net/swagger" target="_blank">Swagger</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>
+
+
+

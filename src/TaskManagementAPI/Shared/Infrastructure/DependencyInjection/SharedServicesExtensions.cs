@@ -1,5 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
+using TaskManagementAPI.Shared.Domain.Interfaces;
 using TaskManagementAPI.Shared.Infrastructure.Middleware;
+using TaskManagementAPI.Shared.Infrastructure.Services;
 
 namespace TaskManagementAPI.Shared.Infrastructure.DependencyInjection;
 
@@ -15,9 +17,8 @@ public static class SharedServicesExtensions
     /// <returns>The service collection for chaining.</returns>
     public static IServiceCollection AddSharedServices(this IServiceCollection services)
     {
-        // Register middleware
-        services.AddScoped<ExceptionHandlingMiddleware>();
-        services.AddScoped<LoggingMiddleware>();
+        // Register notification service
+        services.AddScoped<INotificationService, NotificationService>();
 
         // Add CORS
         services.AddCors(options =>
@@ -44,10 +45,8 @@ public static class SharedServicesExtensions
     /// <returns>The application builder for chaining.</returns>
     public static IApplicationBuilder UseSharedMiddleware(this IApplicationBuilder app)
     {
-        app.UseMiddleware<ExceptionHandlingMiddleware>();
-        app.UseMiddleware<LoggingMiddleware>();
         app.UseCors("AllowAll");
-
+        // TODO: Add exception handling and logging middleware when properly configured
         return app;
     }
 }

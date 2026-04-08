@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - Task Management API</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="bg-atmosphere"></div>
+    <div class="container">
+        <header>
+            <div class="header-container">
+                <a href="index.html" class="logo-section">
+                    <img src="images/logo.png" alt="Task Management API Logo" class="logo-image">
+                    <span class="brand-name">Task Management API</span>
+                </a>
+                <nav class="navbar">
+                    <ul>
+                        <li><a href="index.html">Overview</a></li>
+                        <li><a href="api-docs.html">API Docs</a></li>
+                        <li><a href="architecture.html">Architecture</a></li>
+                        <li><a href="features.html" class="active">Features</a></li>
+                        <li><a href="http://localhost:5120/swagger" target="_blank">Swagger UI</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div class="doc-layout">
+                <aside class="doc-sidebar">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search features..." id="searchInput">
+                    </div>
+                    <div class="sidebar-title">Features</div>
+                    <a href="#core-features" class="sidebar-link active">Core Features</a>
+                    <a href="#authentication" class="sidebar-link">Authentication</a>
+                    <a href="#catalog" class="sidebar-link">Catalog Management</a>
+                    <a href="#shopping" class="sidebar-link">Shopping Cart</a>
+                    <a href="#orders" class="sidebar-link">Order Management</a>
+                    <a href="#inventory" class="sidebar-link">Inventory</a>
+                    <a href="#performance" class="sidebar-link">Performance</a>
+                </aside>
+
+                <div class="doc-content">
+                    <section id="core-features">
+                        <h2>🚀 Core Features</h2>
+                        <p class="subtitle">Comprehensive feature set for a modern online bookstore platform</p>
+                        
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <span class="feature-icon">🔐</span>
+                                <h4>Secure Authentication</h4>
+                                <p>JWT-based authentication with secure password hashing and token management</p>
+                                <ul class="feature-list">
+                                    <li>User registration & login</li>
+                                    <li>JWT token generation</li>
+                                    <li>Secure password storage</li>
+                                </ul>
+                            </div>
+
+                            <div class="feature-card">
+                                <span class="feature-icon">📖</span>
+                                <h4>Book Catalog</h4>
+                                <p>Comprehensive book management with search and filtering capabilities</p>
+                                <ul class="feature-list">
+                                    <li>Browse all books</li>
+                                    <li>Search by title/author</li>
+                                    <li>Filter by price range</li>
+                                </ul>
+                            </div>
+
+                            <div class="feature-card">
+                                <span class="feature-icon">🛒</span>
+                                <h4>Shopping Cart</h4>
+                                <p>Full-featured shopping cart with add, remove, and clear operations</p>
+                                <ul class="feature-list">
+                                    <li>Add items to cart</li>
+                                    <li>Manage quantities</li>
+                                    <li>Real-time total calculation</li>
+                                </ul>
+                            </div>
+
+                            <div class="feature-card">
+                                <span class="feature-icon">📦</span>
+                                <h4>Order Management</h4>
+                                <p>Complete order lifecycle management with status tracking</p>
+                                <ul class="feature-list">
+                                    <li>Place orders</li>
+                                    <li>Track order status</li>
+                                    <li>Order history</li>
+                                </ul>
+                            </div>
+
+                            <div class="feature-card">
+                                <span class="feature-icon">📊</span>
+                                <h4>Inventory Management</h4>
+                                <p>Real-time inventory tracking and low stock alerts</p>
+                                <ul class="feature-list">
+                                    <li>Stock quantity tracking</li>
+                                    <li>Low stock notifications</li>
+                                    <li>Inventory adjustments</li>
+                                </ul>
+                            </div>
+
+                            <div class="feature-card">
+                                <span class="feature-icon">⚡</span>
+                                <h4>High Performance</h4>
+                                <p>Optimized for speed with caching and efficient queries</p>
+                                <ul class="feature-list">
+                                    <li>Redis caching</li>
+                                    <li>Query optimization</li>
+                                    <li>Pagination support</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="authentication">
+                        <h2>🔐 Authentication & Security</h2>
+                        <p class="subtitle">Enterprise-grade security features</p>
+                        
+                        <h3>JWT Token-Based Authentication</h3>
+                        <p>Secure token-based authentication system with automatic expiration and refresh capabilities.</p>
+                        <div class="getting-started-grid">
+                            <div class="getting-started-card">
+                                <h3>🔑 Token Generation</h3>
+                                <p>Automatic JWT token generation on successful login with 24-hour expiration</p>
+                                <code>Authorization: Bearer {token}</code>
+                            </div>
+                            <div class="getting-started-card">
+                                <h3>🛡️ Password Security</h3>
+                                <p>Passwords are hashed using industry-standard algorithms</p>
+                                <code>bcrypt with salt rounds</code>
+                            </div>
+                            <div class="getting-started-card">
+                                <h3>👤 User Registration</h3>
+                                <p>Self-service registration with email validation</p>
+                                <code>POST /api/auth/register</code>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="catalog">
+                        <h2>📖 Catalog Management</h2>
+                        <p class="subtitle">Powerful book discovery and management</p>
+                        
+                        <h3>Advanced Search & Filtering</h3>
+                        <p>Find books easily with multiple search and filter options:</p>
+                        <ul>
+                            <li><strong>Search by Title:</strong> Full-text search across book titles</li>
+                            <li><strong>Filter by Author:</strong> Browse books by specific authors</li>
+                            <li><strong>Price Range:</strong> Filter books within your budget</li>
+                            <li><strong>Pagination:</strong> Browse results page by page</li>
+                        </ul>
+
+                        <h3>Book Details</h3>
+                        <p>Each book includes comprehensive information:</p>
+                        <ul>
+                            <li>Title and Author</li>
+                            <li>ISBN (International Standard Book Number)</li>
+                            <li>Description and Details</li>
+                            <li>Current Price</li>
+                            <li>Stock Availability</li>
+                        </ul>
+                    </section>
+
+                    <section id="shopping">
+                        <h2>🛒 Shopping Cart</h2>
+                        <p class="subtitle">Seamless shopping experience</p>
+                        
+                        <h3>Cart Operations</h3>
+                        <div class="getting-started-grid">
+                            <div class="getting-started-card">
+                                <h3>➕ Add to Cart</h3>
+                                <p>Add books with desired quantity to your cart</p>
+                                <code>POST /api/cart/add</code>
+                            </div>
+                            <div class="getting-started-card">
+                                <h3>➖ Remove Items</h3>
+                                <p>Remove specific items from your cart</p>
+                                <code>DELETE /api/cart/remove</code>
+                            </div>
+                            <div class="getting-started-card">
+                                <h3>🗑️ Clear Cart</h3>
+                                <p>Clear all items from your cart at once</p>
+                                <code>DELETE /api/cart/clear</code>
+                            </div>
+                        </div>
+
+                        <h3>Real-Time Calculations</h3>
+                        <p>Cart totals are calculated in real-time based on current prices and quantities.</p>
+                    </section>
+
+                    <section id="orders">
+                        <h2>📦 Order Management</h2>
+                        <p class="subtitle">Complete order lifecycle</p>
+                        
+                        <h3>Order Workflow</h3>
+                        <ul>
+                            <li><strong>Place Order:</strong> Convert cart items into an order</li>
+                            <li><strong>Order Confirmation:</strong> Immediate confirmation with order ID</li>
+                            <li><strong>Status Tracking:</strong> Real-time order status updates</li>
+                            <li><strong>Order History:</strong> View all past orders with details</li>
+                        </ul>
+
+                        <h3>Order Status</h3>
+                        <p>Orders progress through the following statuses:</p>
+                        <ul>
+                            <li><strong>Pending:</strong> Order received, awaiting processing</li>
+                            <li><strong>Processing:</strong> Order is being prepared</li>
+                            <li><strong>Shipped:</strong> Order has been dispatched</li>
+                            <li><strong>Delivered:</strong> Order successfully delivered</li>
+                            <li><strong>Cancelled:</strong> Order was cancelled</li>
+                        </ul>
+                    </section>
+
+                    <section id="inventory">
+                        <h2>📊 Inventory Management</h2>
+                        <p class="subtitle">Smart stock management</p>
+                        
+                        <h3>Stock Tracking</h3>
+                        <p>Real-time inventory tracking ensures accurate stock information:</p>
+                        <ul>
+                            <li>Live stock quantity updates</li>
+                            <li>Automatic stock deduction on order placement</li>
+                            <li>Stock availability validation</li>
+                            <li>Low stock alerts</li>
+                        </ul>
+
+                        <h3>Low Stock Notifications</h3>
+                        <p>Get notified when books fall below minimum stock threshold. Helps maintain optimal inventory levels.</p>
+
+                        <h3>Inventory Adjustments</h3>
+                        <p>Admin capabilities for manual inventory adjustments when needed.</p>
+                    </section>
+
+                    <section id="performance">
+                        <h2>⚡ Performance & Optimization</h2>
+                        <p class="subtitle">Built for speed and scalability</p>
+                        
+                        <h3>Caching Strategy</h3>
+                        <p>Redis-based caching for frequently accessed data:</p>
+                        <ul>
+                            <li><strong>Book Catalog Cache:</strong> 5-minute TTL for book listings</li>
+                            <li><strong>Individual Book Cache:</strong> 10-minute TTL for book details</li>
+                            <li><strong>Order History Cache:</strong> 1-minute TTL for recent orders</li>
+                            <li><strong>Smart Invalidation:</strong> Cache automatically invalidated on updates</li>
+                        </ul>
+
+                        <h3>Database Optimization</h3>
+                        <ul>
+                            <li>Indexed queries for fast lookups</li>
+                            <li>Pagination for large result sets</li>
+                            <li>Covering indexes for common queries</li>
+                            <li>Connection pooling</li>
+                        </ul>
+
+                        <h3>API Performance</h3>
+                        <ul>
+                            <li>Response compression</li>
+                            <li>Async/await for non-blocking operations</li>
+                            <li>Efficient serialization</li>
+                            <li>Rate limiting support</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2024 Bookstore API. All rights reserved.</p>
+                </div>
+                <div class="footer-right">
+                    <p>
+                        <a href="terms.html">Terms of Service</a> | 
+                        <a href="license.html">License</a> | 
+                        <a href="http://online-bookstore-api.runasp.net/swagger" target="_blank">API Documentation</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation - Task Management API</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="bg-atmosphere"></div>
+    <div class="container">
+        <header>
+            <div class="header-container">
+                <a href="index.html" class="logo-section">
+                    <img src="images/logo.png" alt="Task Management API Logo" class="logo-image">
+                    <span class="brand-name">Task Management API</span>
+                </a>
+                <nav class="navbar">
+                    <ul>
+                        <li><a href="index.html">Overview</a></li>
+                        <li><a href="api-docs.html" class="active">API Docs</a></li>
+                        <li><a href="architecture.html">Architecture</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="http://localhost:5120/swagger" target="_blank">Swagger UI</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="doc-layout">
+                <aside class="doc-sidebar">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search endpoints...">
+                    </div>
+                    <div class="sidebar-nav">
+                        <div class="sidebar-title">API Endpoints</div>
+                        <a href="#projects" class="sidebar-link active">
+                            <i class="fas fa-folder"></i> Projects
+                        </a>
+                        <a href="#tasks" class="sidebar-link">
+                            <i class="fas fa-tasks"></i> Tasks
+                        </a>
+                        <a href="#users" class="sidebar-link">
+                            <i class="fas fa-users"></i> Users
+                        </a>
+                        <a href="#notifications" class="sidebar-link">
+                            <i class="fas fa-bell"></i> Notifications
+                        </a>
+                        <a href="#auth" class="sidebar-link">
+                            <i class="fas fa-lock"></i> Authentication
+                        </a>
+                    </div>
+                </aside>
+
+                <div class="doc-content">
+                    <section id="projects">
+                        <h2><i class="fas fa-folder"></i> Projects Endpoints</h2>
+                        <p>Manage projects and team members.</p>
+
+                        <div class="endpoints-container">
+                            <div class="endpoint-category">
+                                <h3>Project Operations</h3>
+                                <div class="endpoints-cards">
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method get">GET</span>
+                                        <div class="endpoint-path">/api/projects</div>
+                                        <div class="endpoint-desc">List all projects with pagination and filtering</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method post">POST</span>
+                                        <div class="endpoint-path">/api/projects</div>
+                                        <div class="endpoint-desc">Create a new project</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method get">GET</span>
+                                        <div class="endpoint-path">/api/projects/{id}</div>
+                                        <div class="endpoint-desc">Get project details with members</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method put">PUT</span>
+                                        <div class="endpoint-path">/api/projects/{id}</div>
+                                        <div class="endpoint-desc">Update project information</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method delete">DELETE</span>
+                                        <div class="endpoint-path">/api/projects/{id}</div>
+                                        <div class="endpoint-desc">Delete a project (soft delete)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="endpoint-category">
+                                <h3>Team Member Management</h3>
+                                <div class="endpoints-cards">
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method post">POST</span>
+                                        <div class="endpoint-path">/api/projects/{id}/members</div>
+                                        <div class="endpoint-desc">Add a team member to project</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method delete">DELETE</span>
+                                        <div class="endpoint-path">/api/projects/{id}/members/{userId}</div>
+                                        <div class="endpoint-desc">Remove a team member from project</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="tasks">
+                        <h2><i class="fas fa-tasks"></i> Tasks Endpoints</h2>
+                        <p>Create and manage tasks within projects.</p>
+
+                        <div class="endpoints-container">
+                            <div class="endpoint-category">
+                                <h3>Task Operations</h3>
+                                <div class="endpoints-cards">
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method get">GET</span>
+                                        <div class="endpoint-path">/api/tasks</div>
+                                        <div class="endpoint-desc">List all tasks with filtering and pagination</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method post">POST</span>
+                                        <div class="endpoint-path">/api/tasks</div>
+                                        <div class="endpoint-desc">Create a new task</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method get">GET</span>
+                                        <div class="endpoint-path">/api/tasks/{id}</div>
+                                        <div class="endpoint-desc">Get task details</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method put">PUT</span>
+                                        <div class="endpoint-path">/api/tasks/{id}</div>
+                                        <div class="endpoint-desc">Update task information</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method delete">DELETE</span>
+                                        <div class="endpoint-path">/api/tasks/{id}</div>
+                                        <div class="endpoint-desc">Delete a task (soft delete)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="endpoint-category">
+                                <h3>Task Status & Assignment</h3>
+                                <div class="endpoints-cards">
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method put">PUT</span>
+                                        <div class="endpoint-path">/api/tasks/{id}/status</div>
+                                        <div class="endpoint-desc">Update task status</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method put">PUT</span>
+                                        <div class="endpoint-path">/api/tasks/{id}/assignee</div>
+                                        <div class="endpoint-desc">Assign task to a user</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method post">POST</span>
+                                        <div class="endpoint-path">/api/tasks/{id}/time-entries</div>
+                                        <div class="endpoint-desc">Add time tracking entry</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="endpoint-category">
+                                <h3>Project Tasks</h3>
+                                <div class="endpoints-cards">
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method get">GET</span>
+                                        <div class="endpoint-path">/api/projects/{projectId}/tasks</div>
+                                        <div class="endpoint-desc">Get all tasks in a project with filtering</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="users">
+                        <h2><i class="fas fa-users"></i> Users Endpoints</h2>
+                        <p>Manage user accounts and profiles.</p>
+
+                        <div class="endpoints-container">
+                            <div class="endpoint-category">
+                                <h3>User Management</h3>
+                                <div class="endpoints-cards">
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method get">GET</span>
+                                        <div class="endpoint-path">/api/users</div>
+                                        <div class="endpoint-desc">List all users (admin only)</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method get">GET</span>
+                                        <div class="endpoint-path">/api/users/{id}</div>
+                                        <div class="endpoint-desc">Get user profile</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method put">PUT</span>
+                                        <div class="endpoint-path">/api/users/{id}</div>
+                                        <div class="endpoint-desc">Update user profile</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method put">PUT</span>
+                                        <div class="endpoint-path">/api/users/{id}/password</div>
+                                        <div class="endpoint-desc">Change user password</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="endpoint-category">
+                                <h3>Role Management</h3>
+                                <div class="endpoints-cards">
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method post">POST</span>
+                                        <div class="endpoint-path">/api/users/{id}/roles</div>
+                                        <div class="endpoint-desc">Assign role to user (admin only)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="notifications">
+                        <h2><i class="fas fa-bell"></i> Notifications Endpoints</h2>
+                        <p>Manage user notifications and preferences.</p>
+
+                        <div class="endpoints-container">
+                            <div class="endpoint-category">
+                                <h3>Notification Management</h3>
+                                <div class="endpoints-cards">
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method get">GET</span>
+                                        <div class="endpoint-path">/api/notifications</div>
+                                        <div class="endpoint-desc">Get user notifications with pagination</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method put">PUT</span>
+                                        <div class="endpoint-path">/api/notifications/{id}/read</div>
+                                        <div class="endpoint-desc">Mark notification as read</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method delete">DELETE</span>
+                                        <div class="endpoint-path">/api/notifications/{id}</div>
+                                        <div class="endpoint-desc">Delete a notification</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="endpoint-category">
+                                <h3>Notification Preferences</h3>
+                                <div class="endpoints-cards">
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method get">GET</span>
+                                        <div class="endpoint-path">/api/notifications/preferences</div>
+                                        <div class="endpoint-desc">Get notification preferences</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method put">PUT</span>
+                                        <div class="endpoint-path">/api/notifications/preferences</div>
+                                        <div class="endpoint-desc">Update notification preferences</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="auth">
+                        <h2><i class="fas fa-lock"></i> Authentication Endpoints</h2>
+                        <p>Handle user authentication and authorization.</p>
+
+                        <div class="endpoints-container">
+                            <div class="endpoint-category">
+                                <h3>Authentication</h3>
+                                <div class="endpoints-cards">
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method post">POST</span>
+                                        <div class="endpoint-path">/api/auth/register</div>
+                                        <div class="endpoint-desc">Register a new user account</div>
+                                    </div>
+                                    <div class="endpoint-card">
+                                        <span class="endpoint-method post">POST</span>
+                                        <div class="endpoint-path">/api/auth/login</div>
+                                        <div class="endpoint-desc">Login and get JWT token</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2026 Task Management API. All rights reserved.</p>
+                </div>
+                <div class="footer-right">
+                    <p>
+                        <a href="terms.html">Terms of Service</a> | 
+                        <a href="license.html">License</a> | 
+                        <a href="http://localhost:5120/swagger" target="_blank">Swagger UI</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,418 @@
+2026-04-08 08:24:53.934 +02:00 [DBG] Hosting starting
+2026-04-08 08:24:54.376 +02:00 [INF] User profile is available. Using 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-08 08:24:54.434 +02:00 [DBG] Reading data from file 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys\key-cd1be0f2-8d94-48ba-9ba3-047a9f12216d.xml'.
+2026-04-08 08:24:54.492 +02:00 [DBG] Found key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d}.
+2026-04-08 08:24:54.585 +02:00 [DBG] Considering key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} with expiration date 2026-05-18 22:00:18Z as default key.
+2026-04-08 08:24:54.613 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:24:54.624 +02:00 [DBG] Decrypting secret element using Windows DPAPI.
+2026-04-08 08:24:54.633 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:24:54.654 +02:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2026-04-08 08:24:54.695 +02:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2026-04-08 08:24:54.721 +02:00 [DBG] Using key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} as the default key.
+2026-04-08 08:24:54.737 +02:00 [DBG] Key ring with default key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} was loaded during application startup.
+2026-04-08 08:24:55.620 +02:00 [DBG] Middleware configuration started with options: {AllowedHosts = *, AllowEmptyHosts = True, IncludeFailureMessage = True}
+2026-04-08 08:24:56.581 +02:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2026-04-08 08:24:56.718 +02:00 [INF] Now listening on: http://localhost:5120
+2026-04-08 08:24:56.720 +02:00 [DBG] Loaded hosting startup assembly TaskManagementAPI
+2026-04-08 08:24:56.727 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-08 08:24:56.731 +02:00 [INF] Hosting environment: Development
+2026-04-08 08:24:56.814 +02:00 [INF] Content root path: C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI
+2026-04-08 08:24:57.136 +02:00 [DBG] Hosting started
+2026-04-08 08:25:45.308 +02:00 [DBG] Connection id "0HNKL6ULBER3G" accepted.
+2026-04-08 08:25:45.314 +02:00 [DBG] Connection id "0HNKL6ULBER3G" started.
+2026-04-08 08:25:45.315 +02:00 [DBG] Connection id "0HNKL6ULBER3H" accepted.
+2026-04-08 08:25:45.321 +02:00 [DBG] Connection id "0HNKL6ULBER3H" started.
+2026-04-08 08:25:45.400 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/ - null null
+2026-04-08 08:25:45.445 +02:00 [DBG] No candidates found for the request path '/'
+2026-04-08 08:25:45.448 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:25:45.457 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-04-08 08:25:45.483 +02:00 [DBG] Connection id "0HNKL6ULBER3H" completed keep alive response.
+2026-04-08 08:25:45.495 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/ - 404 0 null 96.8208ms
+2026-04-08 08:25:45.629 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5120/, Response status code: 404
+2026-04-08 08:26:45.407 +02:00 [DBG] Connection id "0HNKL6ULBER3G" received FIN.
+2026-04-08 08:26:45.484 +02:00 [DBG] Connection id "0HNKL6ULBER3G" disconnecting.
+2026-04-08 08:26:45.497 +02:00 [DBG] Connection id "0HNKL6ULBER3G" sending FIN because: "The Socket transport's send loop completed gracefully."
+2026-04-08 08:26:45.509 +02:00 [DBG] Connection id "0HNKL6ULBER3G" stopped.
+2026-04-08 08:27:56.662 +02:00 [DBG] Connection id "0HNKL6ULBER3H" disconnecting.
+2026-04-08 08:27:56.665 +02:00 [DBG] Connection id "0HNKL6ULBER3H" stopped.
+2026-04-08 08:27:56.668 +02:00 [DBG] Connection id "0HNKL6ULBER3H" sending FIN because: "The Socket transport's send loop completed gracefully."
+2026-04-08 08:29:42.615 +02:00 [DBG] Hosting starting
+2026-04-08 08:29:42.708 +02:00 [INF] User profile is available. Using 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-08 08:29:42.721 +02:00 [DBG] Reading data from file 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys\key-cd1be0f2-8d94-48ba-9ba3-047a9f12216d.xml'.
+2026-04-08 08:29:42.740 +02:00 [DBG] Found key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d}.
+2026-04-08 08:29:42.779 +02:00 [DBG] Considering key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} with expiration date 2026-05-18 22:00:18Z as default key.
+2026-04-08 08:29:42.794 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:29:42.801 +02:00 [DBG] Decrypting secret element using Windows DPAPI.
+2026-04-08 08:29:42.804 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:29:42.814 +02:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2026-04-08 08:29:42.819 +02:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2026-04-08 08:29:42.826 +02:00 [DBG] Using key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} as the default key.
+2026-04-08 08:29:42.829 +02:00 [DBG] Key ring with default key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} was loaded during application startup.
+2026-04-08 08:29:42.909 +02:00 [DBG] Middleware configuration started with options: {AllowedHosts = *, AllowEmptyHosts = True, IncludeFailureMessage = True}
+2026-04-08 08:29:42.914 +02:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2026-04-08 08:29:42.936 +02:00 [INF] Now listening on: http://localhost:5120
+2026-04-08 08:29:42.937 +02:00 [DBG] Loaded hosting startup assembly TaskManagementAPI
+2026-04-08 08:29:42.945 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-08 08:29:42.947 +02:00 [INF] Hosting environment: Development
+2026-04-08 08:29:42.949 +02:00 [INF] Content root path: C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI
+2026-04-08 08:29:42.951 +02:00 [DBG] Hosting started
+2026-04-08 08:31:31.995 +02:00 [DBG] Hosting starting
+2026-04-08 08:31:32.115 +02:00 [INF] User profile is available. Using 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-08 08:31:32.150 +02:00 [DBG] Reading data from file 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys\key-cd1be0f2-8d94-48ba-9ba3-047a9f12216d.xml'.
+2026-04-08 08:31:32.185 +02:00 [DBG] Found key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d}.
+2026-04-08 08:31:32.222 +02:00 [DBG] Considering key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} with expiration date 2026-05-18 22:00:18Z as default key.
+2026-04-08 08:31:32.239 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:31:32.254 +02:00 [DBG] Decrypting secret element using Windows DPAPI.
+2026-04-08 08:31:32.267 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:31:32.277 +02:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2026-04-08 08:31:32.285 +02:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2026-04-08 08:31:32.298 +02:00 [DBG] Using key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} as the default key.
+2026-04-08 08:31:32.306 +02:00 [DBG] Key ring with default key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} was loaded during application startup.
+2026-04-08 08:31:32.405 +02:00 [DBG] Middleware configuration started with options: {AllowedHosts = *, AllowEmptyHosts = True, IncludeFailureMessage = True}
+2026-04-08 08:31:32.414 +02:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2026-04-08 08:31:32.518 +02:00 [INF] Now listening on: http://localhost:5120
+2026-04-08 08:31:32.532 +02:00 [DBG] Loaded hosting startup assembly TaskManagementAPI
+2026-04-08 08:31:32.534 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-08 08:31:32.537 +02:00 [INF] Hosting environment: Development
+2026-04-08 08:31:32.545 +02:00 [INF] Content root path: C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI
+2026-04-08 08:31:32.547 +02:00 [DBG] Hosting started
+2026-04-08 08:32:19.790 +02:00 [DBG] Connection id "0HNKL72ATHBFO" accepted.
+2026-04-08 08:32:19.794 +02:00 [DBG] Connection id "0HNKL72ATHBFP" accepted.
+2026-04-08 08:32:19.794 +02:00 [DBG] Connection id "0HNKL72ATHBFO" started.
+2026-04-08 08:32:19.797 +02:00 [DBG] Connection id "0HNKL72ATHBFP" started.
+2026-04-08 08:32:19.846 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/ - null null
+2026-04-08 08:32:19.870 +02:00 [DBG] No candidates found for the request path '/'
+2026-04-08 08:32:19.874 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:32:19.876 +02:00 [DBG] The request path / does not match a supported file type
+2026-04-08 08:32:19.881 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-04-08 08:32:19.894 +02:00 [DBG] Connection id "0HNKL72ATHBFO" completed keep alive response.
+2026-04-08 08:32:19.898 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/404.html - 404 0 null 53.982ms
+2026-04-08 08:32:19.962 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5120/404.html, Response status code: 404
+2026-04-08 08:32:20.625 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/ - null null
+2026-04-08 08:32:20.630 +02:00 [DBG] No candidates found for the request path '/'
+2026-04-08 08:32:20.633 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:32:20.635 +02:00 [DBG] The request path / does not match a supported file type
+2026-04-08 08:32:20.640 +02:00 [DBG] Connection id "0HNKL72ATHBFO" completed keep alive response.
+2026-04-08 08:32:20.645 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/404.html - 404 0 null 20.0355ms
+2026-04-08 08:32:20.653 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5120/404.html, Response status code: 404
+2026-04-08 08:33:07.373 +02:00 [DBG] Hosting starting
+2026-04-08 08:33:07.530 +02:00 [INF] User profile is available. Using 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-08 08:33:07.547 +02:00 [DBG] Reading data from file 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys\key-cd1be0f2-8d94-48ba-9ba3-047a9f12216d.xml'.
+2026-04-08 08:33:07.569 +02:00 [DBG] Found key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d}.
+2026-04-08 08:33:07.615 +02:00 [DBG] Considering key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} with expiration date 2026-05-18 22:00:18Z as default key.
+2026-04-08 08:33:07.628 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:33:07.635 +02:00 [DBG] Decrypting secret element using Windows DPAPI.
+2026-04-08 08:33:07.642 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:33:07.649 +02:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2026-04-08 08:33:07.655 +02:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2026-04-08 08:33:07.659 +02:00 [DBG] Using key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} as the default key.
+2026-04-08 08:33:07.668 +02:00 [DBG] Key ring with default key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} was loaded during application startup.
+2026-04-08 08:33:07.723 +02:00 [DBG] Middleware configuration started with options: {AllowedHosts = *, AllowEmptyHosts = True, IncludeFailureMessage = True}
+2026-04-08 08:33:07.727 +02:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2026-04-08 08:33:07.744 +02:00 [INF] Now listening on: http://localhost:5120
+2026-04-08 08:33:07.746 +02:00 [DBG] Loaded hosting startup assembly TaskManagementAPI
+2026-04-08 08:33:07.749 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-08 08:33:07.751 +02:00 [INF] Hosting environment: Development
+2026-04-08 08:33:07.752 +02:00 [INF] Content root path: C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI
+2026-04-08 08:33:07.754 +02:00 [DBG] Hosting started
+2026-04-08 08:33:21.386 +02:00 [DBG] Connection id "0HNKL72T8URT4" accepted.
+2026-04-08 08:33:21.390 +02:00 [DBG] Connection id "0HNKL72T8URT4" started.
+2026-04-08 08:33:21.392 +02:00 [DBG] Connection id "0HNKL72T8URT5" accepted.
+2026-04-08 08:33:21.395 +02:00 [DBG] Connection id "0HNKL72T8URT5" started.
+2026-04-08 08:33:21.437 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/ - null null
+2026-04-08 08:33:21.468 +02:00 [DBG] No candidates found for the request path '/'
+2026-04-08 08:33:21.473 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:33:21.478 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-04-08 08:33:21.512 +02:00 [INF] Sending file. Request path: '/index.html'. Physical path: 'C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\wwwroot\index.html'
+2026-04-08 08:33:21.520 +02:00 [DBG] Connection id "0HNKL72T8URT5" completed keep alive response.
+2026-04-08 08:33:21.555 +02:00 [DBG] Connection id "0HNKL72T8URT6" accepted.
+2026-04-08 08:33:21.559 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/index.html - 200 18374 text/html 123.5815ms
+2026-04-08 08:33:21.559 +02:00 [DBG] Connection id "0HNKL72T8URT6" started.
+2026-04-08 08:33:21.560 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/images/logo.png - null null
+2026-04-08 08:33:21.601 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/js/main.js - null null
+2026-04-08 08:33:21.611 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/css/styles.css - null null
+2026-04-08 08:33:21.612 +02:00 [DBG] No candidates found for the request path '/images/logo.png'
+2026-04-08 08:33:21.627 +02:00 [DBG] No candidates found for the request path '/css/styles.css'
+2026-04-08 08:33:21.616 +02:00 [DBG] No candidates found for the request path '/js/main.js'
+2026-04-08 08:33:21.629 +02:00 [DBG] Connection id "0HNKL72T8URT7" accepted.
+2026-04-08 08:33:21.629 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:33:21.632 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:33:21.634 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:33:21.637 +02:00 [DBG] Connection id "0HNKL72T8URT7" started.
+2026-04-08 08:33:21.648 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/js/search.js - null null
+2026-04-08 08:33:21.653 +02:00 [DBG] No candidates found for the request path '/js/search.js'
+2026-04-08 08:33:21.660 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:33:21.661 +02:00 [INF] Sending file. Request path: '/css/styles.css'. Physical path: 'C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\wwwroot\css\styles.css'
+2026-04-08 08:33:21.678 +02:00 [DBG] Connection id "0HNKL72T8URT5" completed keep alive response.
+2026-04-08 08:33:21.695 +02:00 [INF] Sending file. Request path: '/images/logo.png'. Physical path: 'C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\wwwroot\images\logo.png'
+2026-04-08 08:33:21.714 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/css/styles.css - 200 25574 text/css 103.8029ms
+2026-04-08 08:33:21.727 +02:00 [INF] Sending file. Request path: '/js/main.js'. Physical path: 'C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\wwwroot\js\main.js'
+2026-04-08 08:33:21.727 +02:00 [DBG] Connection id "0HNKL72T8URT4" completed keep alive response.
+2026-04-08 08:33:21.743 +02:00 [INF] Sending file. Request path: '/js/search.js'. Physical path: 'C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\wwwroot\js\search.js'
+2026-04-08 08:33:21.756 +02:00 [DBG] Connection id "0HNKL72T8URT6" completed keep alive response.
+2026-04-08 08:33:21.759 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/images/logo.png - 200 96506 image/png 198.9103ms
+2026-04-08 08:33:21.761 +02:00 [DBG] Connection id "0HNKL72T8URT7" completed keep alive response.
+2026-04-08 08:33:21.764 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/js/main.js - 200 9223 text/javascript 162.8602ms
+2026-04-08 08:33:21.777 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/js/search.js - 200 3606 text/javascript 129.0022ms
+2026-04-08 08:34:07.660 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/swagger - null null
+2026-04-08 08:34:07.669 +02:00 [DBG] No candidates found for the request path '/swagger'
+2026-04-08 08:34:07.671 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:34:07.678 +02:00 [DBG] The request path /swagger does not match a supported file type
+2026-04-08 08:34:07.683 +02:00 [DBG] Connection id "0HNKL72T8URT7" completed keep alive response.
+2026-04-08 08:34:07.699 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/404.html - 404 0 null 37.77ms
+2026-04-08 08:34:07.765 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5120/404.html, Response status code: 404
+2026-04-08 08:35:48.541 +02:00 [DBG] Hosting starting
+2026-04-08 08:35:48.663 +02:00 [INF] User profile is available. Using 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-08 08:35:48.685 +02:00 [DBG] Reading data from file 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys\key-cd1be0f2-8d94-48ba-9ba3-047a9f12216d.xml'.
+2026-04-08 08:35:48.708 +02:00 [DBG] Found key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d}.
+2026-04-08 08:35:48.744 +02:00 [DBG] Considering key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} with expiration date 2026-05-18 22:00:18Z as default key.
+2026-04-08 08:35:48.757 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:35:48.764 +02:00 [DBG] Decrypting secret element using Windows DPAPI.
+2026-04-08 08:35:48.772 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:35:48.780 +02:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2026-04-08 08:35:48.789 +02:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2026-04-08 08:35:48.797 +02:00 [DBG] Using key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} as the default key.
+2026-04-08 08:35:48.806 +02:00 [DBG] Key ring with default key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} was loaded during application startup.
+2026-04-08 08:35:48.897 +02:00 [DBG] Middleware configuration started with options: {AllowedHosts = *, AllowEmptyHosts = True, IncludeFailureMessage = True}
+2026-04-08 08:35:48.903 +02:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2026-04-08 08:35:48.929 +02:00 [INF] Now listening on: http://localhost:5120
+2026-04-08 08:35:48.934 +02:00 [DBG] Loaded hosting startup assembly TaskManagementAPI
+2026-04-08 08:35:48.937 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-08 08:35:48.939 +02:00 [INF] Hosting environment: Development
+2026-04-08 08:35:48.942 +02:00 [INF] Content root path: C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI
+2026-04-08 08:35:48.944 +02:00 [DBG] Hosting started
+2026-04-08 08:38:48.822 +02:00 [DBG] Hosting starting
+2026-04-08 08:38:48.938 +02:00 [INF] User profile is available. Using 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-08 08:38:48.950 +02:00 [DBG] Reading data from file 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys\key-cd1be0f2-8d94-48ba-9ba3-047a9f12216d.xml'.
+2026-04-08 08:38:48.967 +02:00 [DBG] Found key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d}.
+2026-04-08 08:38:48.994 +02:00 [DBG] Considering key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} with expiration date 2026-05-18 22:00:18Z as default key.
+2026-04-08 08:38:49.002 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:38:49.007 +02:00 [DBG] Decrypting secret element using Windows DPAPI.
+2026-04-08 08:38:49.012 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:38:49.020 +02:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2026-04-08 08:38:49.025 +02:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2026-04-08 08:38:49.029 +02:00 [DBG] Using key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} as the default key.
+2026-04-08 08:38:49.032 +02:00 [DBG] Key ring with default key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} was loaded during application startup.
+2026-04-08 08:38:49.148 +02:00 [DBG] Middleware configuration started with options: {AllowedHosts = *, AllowEmptyHosts = True, IncludeFailureMessage = True}
+2026-04-08 08:38:49.326 +02:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2026-04-08 08:38:49.349 +02:00 [INF] Now listening on: http://localhost:5120
+2026-04-08 08:38:49.355 +02:00 [DBG] Loaded hosting startup assembly TaskManagementAPI
+2026-04-08 08:38:49.358 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-08 08:38:49.359 +02:00 [INF] Hosting environment: Development
+2026-04-08 08:38:49.362 +02:00 [INF] Content root path: C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI
+2026-04-08 08:38:49.364 +02:00 [DBG] Hosting started
+2026-04-08 08:39:14.528 +02:00 [DBG] Connection id "0HNKL766GOEER" accepted.
+2026-04-08 08:39:15.478 +02:00 [DBG] Connection id "0HNKL766GOEES" accepted.
+2026-04-08 08:39:15.479 +02:00 [DBG] Connection id "0HNKL766GOEER" started.
+2026-04-08 08:39:15.500 +02:00 [DBG] Connection id "0HNKL766GOEES" started.
+2026-04-08 08:39:15.701 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/api-docs.html - null null
+2026-04-08 08:39:15.796 +02:00 [DBG] No candidates found for the request path '/api-docs.html'
+2026-04-08 08:39:15.803 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:39:15.857 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:39:15.875 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-04-08 08:39:15.951 +02:00 [INF] Sending file. Request path: '/api-docs.html'. Physical path: 'C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\wwwroot\api-docs.html'
+2026-04-08 08:39:16.023 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/images/logo.png - null null
+2026-04-08 08:39:16.040 +02:00 [DBG] Connection id "0HNKL766GOEES" completed keep alive response.
+2026-04-08 08:39:16.042 +02:00 [DBG] No candidates found for the request path '/images/logo.png'
+2026-04-08 08:39:16.054 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/api-docs.html - 200 18690 text/html 364.5527ms
+2026-04-08 08:39:16.055 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:39:16.151 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/css/styles.css - null null
+2026-04-08 08:39:16.152 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:39:16.175 +02:00 [DBG] No candidates found for the request path '/css/styles.css'
+2026-04-08 08:39:16.188 +02:00 [INF] The file /images/logo.png was not modified
+2026-04-08 08:39:16.202 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:39:16.209 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:39:16.213 +02:00 [DBG] Handled. Status code: 304 File: /images/logo.png
+2026-04-08 08:39:16.220 +02:00 [INF] Sending file. Request path: '/css/styles.css'. Physical path: 'C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\wwwroot\css\styles.css'
+2026-04-08 08:39:16.222 +02:00 [DBG] Connection id "0HNKL766GOEER" completed keep alive response.
+2026-04-08 08:39:16.246 +02:00 [DBG] Connection id "0HNKL766GOEES" completed keep alive response.
+2026-04-08 08:39:16.259 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/images/logo.png - 304 null image/png 235.7547ms
+2026-04-08 08:39:16.283 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/css/styles.css - 200 28334 text/css 131.0707ms
+2026-04-08 08:39:27.962 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/index.html - null null
+2026-04-08 08:39:28.023 +02:00 [DBG] No candidates found for the request path '/index.html'
+2026-04-08 08:39:28.026 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:39:28.042 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:39:28.108 +02:00 [INF] Sending file. Request path: '/index.html'. Physical path: 'C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\wwwroot\index.html'
+2026-04-08 08:39:28.195 +02:00 [DBG] Connection id "0HNKL766GOEES" completed keep alive response.
+2026-04-08 08:39:28.204 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/index.html - 200 18374 text/html 242.3449ms
+2026-04-08 08:39:28.212 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/css/styles.css - null null
+2026-04-08 08:39:28.228 +02:00 [DBG] No candidates found for the request path '/css/styles.css'
+2026-04-08 08:39:28.241 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:39:28.244 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:39:28.257 +02:00 [INF] The file /css/styles.css was not modified
+2026-04-08 08:39:28.260 +02:00 [DBG] Handled. Status code: 304 File: /css/styles.css
+2026-04-08 08:39:28.272 +02:00 [DBG] Connection id "0HNKL766GOEES" completed keep alive response.
+2026-04-08 08:39:28.309 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/css/styles.css - 304 null text/css 97.0804ms
+2026-04-08 08:39:35.663 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/architecture.html - null null
+2026-04-08 08:39:35.897 +02:00 [DBG] No candidates found for the request path '/architecture.html'
+2026-04-08 08:39:35.903 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:39:35.907 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:39:35.910 +02:00 [INF] Sending file. Request path: '/architecture.html'. Physical path: 'C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\wwwroot\architecture.html'
+2026-04-08 08:39:36.010 +02:00 [DBG] Connection id "0HNKL766GOEES" completed keep alive response.
+2026-04-08 08:39:36.013 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/architecture.html - 200 15559 text/html 350.0897ms
+2026-04-08 08:39:36.029 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/css/styles.css - null null
+2026-04-08 08:39:36.057 +02:00 [DBG] No candidates found for the request path '/css/styles.css'
+2026-04-08 08:39:36.062 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:39:36.065 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:39:36.074 +02:00 [INF] The file /css/styles.css was not modified
+2026-04-08 08:39:36.078 +02:00 [DBG] Handled. Status code: 304 File: /css/styles.css
+2026-04-08 08:39:36.081 +02:00 [DBG] Connection id "0HNKL766GOEES" completed keep alive response.
+2026-04-08 08:39:36.097 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/css/styles.css - 304 null text/css 67.3901ms
+2026-04-08 08:40:20.547 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/features.html - null null
+2026-04-08 08:40:20.561 +02:00 [DBG] No candidates found for the request path '/features.html'
+2026-04-08 08:40:20.564 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:40:20.569 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:40:20.572 +02:00 [INF] Sending file. Request path: '/features.html'. Physical path: 'C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\wwwroot\features.html'
+2026-04-08 08:40:20.577 +02:00 [DBG] Connection id "0HNKL766GOEES" completed keep alive response.
+2026-04-08 08:40:20.656 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/features.html - 200 15645 text/html 109.7901ms
+2026-04-08 08:40:20.665 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/css/styles.css - null null
+2026-04-08 08:40:20.671 +02:00 [DBG] No candidates found for the request path '/css/styles.css'
+2026-04-08 08:40:20.673 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:40:20.675 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:40:20.677 +02:00 [INF] The file /css/styles.css was not modified
+2026-04-08 08:40:20.682 +02:00 [DBG] Handled. Status code: 304 File: /css/styles.css
+2026-04-08 08:40:20.685 +02:00 [DBG] Connection id "0HNKL766GOEES" completed keep alive response.
+2026-04-08 08:40:20.691 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/css/styles.css - 304 null text/css 25.9547ms
+2026-04-08 08:41:25.655 +02:00 [DBG] Hosting starting
+2026-04-08 08:41:25.758 +02:00 [INF] User profile is available. Using 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-08 08:41:25.776 +02:00 [DBG] Reading data from file 'C:\Users\Memo\AppData\Local\ASP.NET\DataProtection-Keys\key-cd1be0f2-8d94-48ba-9ba3-047a9f12216d.xml'.
+2026-04-08 08:41:25.797 +02:00 [DBG] Found key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d}.
+2026-04-08 08:41:25.823 +02:00 [DBG] Considering key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} with expiration date 2026-05-18 22:00:18Z as default key.
+2026-04-08 08:41:25.830 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:41:25.837 +02:00 [DBG] Decrypting secret element using Windows DPAPI.
+2026-04-08 08:41:25.841 +02:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2026-04-08 08:41:25.846 +02:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2026-04-08 08:41:25.852 +02:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2026-04-08 08:41:25.857 +02:00 [DBG] Using key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} as the default key.
+2026-04-08 08:41:25.863 +02:00 [DBG] Key ring with default key {cd1be0f2-8d94-48ba-9ba3-047a9f12216d} was loaded during application startup.
+2026-04-08 08:41:25.940 +02:00 [DBG] Middleware configuration started with options: {AllowedHosts = *, AllowEmptyHosts = True, IncludeFailureMessage = True}
+2026-04-08 08:41:25.944 +02:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2026-04-08 08:41:25.963 +02:00 [INF] Now listening on: http://localhost:5120
+2026-04-08 08:41:25.968 +02:00 [DBG] Loaded hosting startup assembly TaskManagementAPI
+2026-04-08 08:41:25.970 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-08 08:41:25.972 +02:00 [INF] Hosting environment: Development
+2026-04-08 08:41:25.974 +02:00 [INF] Content root path: C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI
+2026-04-08 08:41:25.976 +02:00 [DBG] Hosting started
+2026-04-08 08:41:28.145 +02:00 [DBG] Connection id "0HNKL77EB206I" accepted.
+2026-04-08 08:41:28.173 +02:00 [DBG] Connection id "0HNKL77EB206J" accepted.
+2026-04-08 08:41:28.173 +02:00 [DBG] Connection id "0HNKL77EB206I" started.
+2026-04-08 08:41:28.188 +02:00 [DBG] Connection id "0HNKL77EB206J" started.
+2026-04-08 08:41:28.313 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/features.html - null null
+2026-04-08 08:41:28.388 +02:00 [DBG] No candidates found for the request path '/features.html'
+2026-04-08 08:41:28.393 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:28.447 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:41:28.456 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-04-08 08:41:28.475 +02:00 [INF] The file /features.html was not modified
+2026-04-08 08:41:28.485 +02:00 [DBG] Handled. Status code: 304 File: /features.html
+2026-04-08 08:41:28.495 +02:00 [DBG] Connection id "0HNKL77EB206J" completed keep alive response.
+2026-04-08 08:41:28.580 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/images/logo.png - null null
+2026-04-08 08:41:28.592 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/features.html - 304 null text/html 282.0634ms
+2026-04-08 08:41:28.605 +02:00 [DBG] No candidates found for the request path '/images/logo.png'
+2026-04-08 08:41:28.673 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/css/styles.css - null null
+2026-04-08 08:41:28.684 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:28.712 +02:00 [DBG] No candidates found for the request path '/css/styles.css'
+2026-04-08 08:41:28.717 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:41:28.726 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:28.742 +02:00 [INF] The file /images/logo.png was not modified
+2026-04-08 08:41:28.763 +02:00 [DBG] Handled. Status code: 304 File: /images/logo.png
+2026-04-08 08:41:28.760 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:41:28.778 +02:00 [DBG] Connection id "0HNKL77EB206I" completed keep alive response.
+2026-04-08 08:41:28.809 +02:00 [INF] Sending file. Request path: '/css/styles.css'. Physical path: 'C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\wwwroot\css\styles.css'
+2026-04-08 08:41:28.809 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/images/logo.png - 304 null image/png 229.5883ms
+2026-04-08 08:41:28.845 +02:00 [DBG] Connection id "0HNKL77EB206J" completed keep alive response.
+2026-04-08 08:41:28.858 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/css/styles.css - 200 28594 text/css 184.878ms
+2026-04-08 08:41:37.841 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/swagger - null null
+2026-04-08 08:41:37.856 +02:00 [DBG] No candidates found for the request path '/swagger'
+2026-04-08 08:41:37.859 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:37.862 +02:00 [DBG] Connection id "0HNKL77EB206J" completed keep alive response.
+2026-04-08 08:41:37.873 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/swagger - 301 0 null 32.67ms
+2026-04-08 08:41:37.882 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/swagger/index.html - null null
+2026-04-08 08:41:37.898 +02:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2026-04-08 08:41:37.911 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:38.061 +02:00 [DBG] Connection id "0HNKL77EB206J" completed keep alive response.
+2026-04-08 08:41:38.069 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/swagger/index.html - 200 null text/html;charset=utf-8 183.2691ms
+2026-04-08 08:41:38.097 +02:00 [DBG] Connection id "0HNKL77EB206K" accepted.
+2026-04-08 08:41:38.107 +02:00 [DBG] Connection id "0HNKL77EB206K" started.
+2026-04-08 08:41:38.102 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/swagger/swagger-ui.css - null null
+2026-04-08 08:41:38.098 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/swagger/swagger-ui-bundle.js - null null
+2026-04-08 08:41:38.121 +02:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-bundle.js'
+2026-04-08 08:41:38.126 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:38.109 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/swagger/swagger-ui-standalone-preset.js - null null
+2026-04-08 08:41:38.115 +02:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2026-04-08 08:41:38.147 +02:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-standalone-preset.js'
+2026-04-08 08:41:38.161 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:38.150 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:38.180 +02:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-04-08 08:41:38.184 +02:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-04-08 08:41:38.228 +02:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-04-08 08:41:38.272 +02:00 [DBG] Connection id "0HNKL77EB206I" completed keep alive response.
+2026-04-08 08:41:38.265 +02:00 [DBG] Connection id "0HNKL77EB206K" completed keep alive response.
+2026-04-08 08:41:38.262 +02:00 [DBG] Connection id "0HNKL77EB206J" completed keep alive response.
+2026-04-08 08:41:38.283 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/swagger/swagger-ui-bundle.js - 200 1096145 text/javascript 185.1462ms
+2026-04-08 08:41:38.295 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/swagger/swagger-ui-standalone-preset.js - 200 339486 text/javascript 185.308ms
+2026-04-08 08:41:38.314 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/swagger/swagger-ui.css - 200 143943 text/css 211.8108ms
+2026-04-08 08:41:39.432 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/swagger/v1/swagger.json - null null
+2026-04-08 08:41:39.474 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/swagger/favicon-32x32.png - null null
+2026-04-08 08:41:39.575 +02:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2026-04-08 08:41:39.581 +02:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2026-04-08 08:41:39.583 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:39.588 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:39.593 +02:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2026-04-08 08:41:39.601 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2026-04-08 08:41:39.604 +02:00 [DBG] Connection id "0HNKL77EB206K" completed keep alive response.
+2026-04-08 08:41:39.608 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/swagger/favicon-32x32.png - 200 628 image/png 134.8271ms
+2026-04-08 08:41:39.614 +02:00 [DBG] Executing API description provider 'EndpointMetadataApiDescriptionProvider' from assembly Microsoft.AspNetCore.Mvc.ApiExplorer v9.0.0.0.
+2026-04-08 08:41:39.662 +02:00 [DBG] Connection id "0HNKL77EB206I" completed keep alive response.
+2026-04-08 08:41:39.667 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 234.5602ms
+2026-04-08 08:41:44.345 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/architecture.html - null null
+2026-04-08 08:41:44.356 +02:00 [DBG] No candidates found for the request path '/architecture.html'
+2026-04-08 08:41:44.358 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:44.360 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:41:44.363 +02:00 [INF] The file /architecture.html was not modified
+2026-04-08 08:41:44.365 +02:00 [DBG] Handled. Status code: 304 File: /architecture.html
+2026-04-08 08:41:44.368 +02:00 [DBG] Connection id "0HNKL77EB206I" completed keep alive response.
+2026-04-08 08:41:44.374 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/architecture.html - 304 null text/html 28.7532ms
+2026-04-08 08:41:44.423 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/css/styles.css - null null
+2026-04-08 08:41:44.434 +02:00 [DBG] No candidates found for the request path '/css/styles.css'
+2026-04-08 08:41:44.438 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:44.440 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:41:44.443 +02:00 [INF] The file /css/styles.css was not modified
+2026-04-08 08:41:44.445 +02:00 [DBG] Handled. Status code: 304 File: /css/styles.css
+2026-04-08 08:41:44.447 +02:00 [DBG] Connection id "0HNKL77EB206I" completed keep alive response.
+2026-04-08 08:41:44.452 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/css/styles.css - 304 null text/css 29.6395ms
+2026-04-08 08:41:51.202 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/api-docs.html - null null
+2026-04-08 08:41:51.231 +02:00 [DBG] No candidates found for the request path '/api-docs.html'
+2026-04-08 08:41:51.233 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:51.234 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:41:51.237 +02:00 [INF] The file /api-docs.html was not modified
+2026-04-08 08:41:51.250 +02:00 [DBG] Handled. Status code: 304 File: /api-docs.html
+2026-04-08 08:41:51.253 +02:00 [DBG] Connection id "0HNKL77EB206I" completed keep alive response.
+2026-04-08 08:41:51.349 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/api-docs.html - 304 null text/html 146.1902ms
+2026-04-08 08:41:51.357 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/css/styles.css - null null
+2026-04-08 08:41:51.364 +02:00 [DBG] No candidates found for the request path '/css/styles.css'
+2026-04-08 08:41:51.366 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:51.368 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:41:51.371 +02:00 [INF] The file /css/styles.css was not modified
+2026-04-08 08:41:51.380 +02:00 [DBG] Handled. Status code: 304 File: /css/styles.css
+2026-04-08 08:41:51.383 +02:00 [DBG] Connection id "0HNKL77EB206I" completed keep alive response.
+2026-04-08 08:41:51.421 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/css/styles.css - 304 null text/css 63.9596ms
+2026-04-08 08:41:55.199 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5120/index.html - null null
+2026-04-08 08:41:55.226 +02:00 [DBG] No candidates found for the request path '/index.html'
+2026-04-08 08:41:55.235 +02:00 [DBG] Request did not match any endpoints
+2026-04-08 08:41:55.238 +02:00 [DBG] The request path  does not match the path filter
+2026-04-08 08:41:55.256 +02:00 [INF] The file /index.html was not modified
+2026-04-08 08:41:55.263 +02:00 [DBG] Handled. Status code: 304 File: /index.html
+2026-04-08 08:41:55.268 +02:00 [DBG] Connection id "0HNKL77EB206I" completed keep alive response.
+2026-04-08 08:41:55.271 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5120/index.html - 304 null text/html 71.8857ms
+2026-04-08 08:43:23.573 +02:00 [DBG] Connection id "0HNKL77EB206J" received FIN.
+2026-04-08 08:43:23.574 +02:00 [DBG] Connection id "0HNKL77EB206K" received FIN.
+2026-04-08 08:43:23.577 +02:00 [DBG] Connection id "0HNKL77EB206I" received FIN.
+2026-04-08 08:43:23.585 +02:00 [DBG] Connection id "0HNKL77EB206K" disconnecting.
+2026-04-08 08:43:23.585 +02:00 [DBG] Connection id "0HNKL77EB206J" disconnecting.
+2026-04-08 08:43:23.589 +02:00 [DBG] Connection id "0HNKL77EB206K" sending FIN because: "The Socket transport's send loop completed gracefully."
+2026-04-08 08:43:23.593 +02:00 [DBG] Connection id "0HNKL77EB206J" sending FIN because: "The Socket transport's send loop completed gracefully."
+2026-04-08 08:43:23.596 +02:00 [DBG] Connection id "0HNKL77EB206I" disconnecting.
+2026-04-08 08:43:23.600 +02:00 [DBG] Connection id "0HNKL77EB206I" sending FIN because: "The Socket transport's send loop completed gracefully."
+2026-04-08 08:43:23.612 +02:00 [DBG] Connection id "0HNKL77EB206I" stopped.
+2026-04-08 08:43:23.612 +02:00 [DBG] Connection id "0HNKL77EB206J" stopped.
+2026-04-08 08:43:23.612 +02:00 [DBG] Connection id "0HNKL77EB206K" stopped.

@@ -163,3 +163,17 @@ C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\bin\Debug\net9.0\ru
 C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\bin\Debug\net9.0\TaskManagementAPI.staticwebassets.runtime.json
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\obj\Debug\net9.0\compressed\ojn6qqxiv1-vlvs3kdmqn.gz
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\obj\Debug\net9.0\compressed\69wa0zjwyi-bclu4acoti.gz
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\obj\Debug\net9.0\compressed\99m0mvoiz1-7z7a4mn3er.gz
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\obj\Debug\net9.0\compressed\8favy6xyyi-4f0kdt0tmh.gz
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\obj\Debug\net9.0\compressed\4lp8q0sogo-thm85kamft.gz
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\obj\Debug\net9.0\compressed\vvpopo4yk6-uzan0u5kp6.gz
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\obj\Debug\net9.0\compressed\w35g43h015-wcm4ehnl4i.gz
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\obj\Debug\net9.0\compressed\lkrm75x3vx-8k1q8up9qz.gz
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\obj\Debug\net9.0\compressed\xyqjyqw4ab-w5gytzg8py.gz
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Memo\Downloads\New folder (8)\src\TaskManagementAPI\obj\Debug\net9.0\compressed\obulbimeu6-eerbfx9ffn.gz
