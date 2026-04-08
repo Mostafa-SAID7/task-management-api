@@ -2,8 +2,12 @@ using Serilog;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TaskManagementAPI.Shared.Infrastructure.Configuration;
 using TaskManagementAPI.Shared.Infrastructure.DependencyInjection;
+using TaskManagementAPI.Shared.Infrastructure.Authorization;
 using TaskManagementAPI.Modules.Projects.Configuration;
 using TaskManagementAPI.Modules.Tasks.Configuration;
 using TaskManagementAPI.Modules.Users.Configuration;
@@ -30,8 +34,62 @@ builder.Services.AddControllers()
     .AddApplicationPart(typeof(Program).Assembly);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAuthorization();
-builder.Services.AddAuthentication();
+
+// Configure JWT Authentication
+var jwtKey = builder.Configuration["Jwt:Key"];
+if (string.IsNullOrEmpty(jwtKey) || jwtKey.Length < 32)
+{
+    throw new InvalidOperationException("JWT Key must be configured and at least 32 characters long");
+}
+
+var jwtKeyBytes = Encoding.UTF8.GetBytes(jwtKey);
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(jwtKeyBytes),
+        ValidateIssuer = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero,
+        RequireExpirationTime = true
+    };
+    options.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = context =>
+        {
+            if (context.Exception is SecurityTokenExpiredException)
+            {
+                context.Response.Headers.Add("X-Token-Expired", "true");
+            }
+            return Task.CompletedTask;
+        }
+    };
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CanEditTask", policy =>
+        policy.Requirements.Add(new CanEditTaskRequirement()));
+    options.AddPolicy("IsProjectMember", policy =>
+        policy.Requirements.Add(new IsProjectMemberRequirement()));
+});
+
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "X-CSRF-TOKEN";
+    options.FormFieldName = "_RequestVerificationToken";
+    options.SuppressXFrameOptionsHeader = false;
+});
+
 builder.Services.AddSharedServices();
 builder.Services.AddProjectsModule(builder.Configuration);
 builder.Services.AddTasksModule(builder.Configuration);
@@ -107,6 +165,14 @@ if (app.Environment.IsDevelopment())
 app.MapControllers();
 app.UseSharedMiddleware();
 app.UseHttpsRedirection();
+
+// Add HSTS for HTTPS enforcement
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHsts();
+}
+
+app.UseAntiforgery();
 app.UseAuthentication();
 app.UseAuthorization();
 

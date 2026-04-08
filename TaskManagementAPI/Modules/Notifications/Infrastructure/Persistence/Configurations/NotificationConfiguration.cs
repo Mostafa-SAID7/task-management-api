@@ -45,5 +45,11 @@ public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
         builder.HasIndex(n => n.CreatedAt);
         builder.HasIndex(n => n.IsRead);
         builder.HasIndex(n => n.Status);
+        
+        // Composite indexes for performance optimization
+        builder.HasIndex(n => new { n.UserId, n.IsRead })
+            .HasDatabaseName("IX_Notification_UserId_IsRead");
+        builder.HasIndex(n => new { n.UserId, n.CreatedAt })
+            .HasDatabaseName("IX_Notification_UserId_CreatedAt");
     }
 }

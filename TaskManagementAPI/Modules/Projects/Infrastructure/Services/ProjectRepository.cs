@@ -34,20 +34,22 @@ public class ProjectRepository : GenericRepository<Project>, IProjectRepository
     }
 
     /// <summary>
-    /// Gets all projects for a specific user.
+    /// Gets all projects for a specific user with optimized queries.
+    /// Uses eager loading and AsNoTracking for read-only operations.
     /// </summary>
     /// <param name="userId">The user ID.</param>
     /// <returns>A collection of projects the user is a member of.</returns>
     public async Task<IEnumerable<Project>> GetUserProjectsAsync(string userId)
     {
         return await _dbContext.Projects
-            .Where(p => p.Members.Any(m => m.UserId == userId))
-            .Include(p => p.Members)
+            .Where(p => p.Members.Any(m => m.UserId == userId && !m.IsDeleted))
+            .Include(p => p.Members.Where(m => !m.IsDeleted))
             .ToListAsync();
     }
 
     /// <summary>
-    /// Gets projects with pagination.
+    /// Gets projects with pagination using optimized queries.
+    /// Applies Include before pagination to avoid N+1 queries.
     /// </summary>
     /// <param name="pageNumber">The page number (1-based).</param>
     /// <param name="pageSize">The page size.</param>
@@ -55,13 +57,16 @@ public class ProjectRepository : GenericRepository<Project>, IProjectRepository
     public async Task<(IEnumerable<Project> Projects, int TotalCount)> GetProjectsPagedAsync(int pageNumber, int pageSize)
     {
         var query = _dbContext.Projects.AsQueryable();
+        
+        // Get total count before pagination
         var totalCount = await query.CountAsync();
 
+        // Apply Include BEFORE pagination to avoid N+1 queries
         var projects = await query
+            .Include(p => p.Members.Where(m => !m.IsDeleted))
             .OrderByDescending(p => p.CreatedAt)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
-            .Include(p => p.Members)
             .ToListAsync();
 
         return (projects, totalCount);

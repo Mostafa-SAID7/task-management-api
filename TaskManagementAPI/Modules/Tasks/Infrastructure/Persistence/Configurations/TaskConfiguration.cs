@@ -47,6 +47,14 @@ public class TaskConfiguration : IEntityTypeConfiguration<WorkTask>
         builder.HasIndex(t => t.Priority);
         builder.HasIndex(t => t.CreatedAt);
         builder.HasIndex(t => t.DueDate);
+        
+        // Composite indexes for performance optimization
+        builder.HasIndex(t => new { t.ProjectId, t.Status })
+            .HasDatabaseName("IX_WorkTask_ProjectId_Status");
+        builder.HasIndex(t => new { t.ProjectId, t.AssigneeId })
+            .HasDatabaseName("IX_WorkTask_ProjectId_AssigneeId");
+        builder.HasIndex(t => t.Slug)
+            .HasDatabaseName("IX_WorkTask_Slug");
 
         // Relationships
         builder.HasMany(t => t.BlockedByDependencies)

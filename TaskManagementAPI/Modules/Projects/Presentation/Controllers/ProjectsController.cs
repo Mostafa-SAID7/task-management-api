@@ -31,6 +31,7 @@ public class ProjectsController : ControllerBase
     /// <returns>The created project.</returns>
     [HttpPost]
     [Authorize(Roles = "Admin,Manager")]
+    [ValidateAntiForgeryToken]
     public async Task<ActionResult<ProjectDto>> CreateProject([FromBody] CreateProjectRequest request)
     {
         if (string.IsNullOrWhiteSpace(request.Name))
@@ -68,6 +69,7 @@ public class ProjectsController : ControllerBase
     /// <returns>The updated project.</returns>
     [HttpPut("{id}")]
     [Authorize(Roles = "Admin,Manager")]
+    [ValidateAntiForgeryToken]
     public async Task<ActionResult<ProjectDto>> UpdateProject(Guid id, [FromBody] UpdateProjectRequest request)
     {
         if (string.IsNullOrWhiteSpace(request.Name))
@@ -90,6 +92,7 @@ public class ProjectsController : ControllerBase
     /// <returns>No content.</returns>
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin,Manager")]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteProject(Guid id)
     {
         var success = await _projectService.DeleteProjectAsync(id);
@@ -138,6 +141,7 @@ public class ProjectsController : ControllerBase
     /// <returns>The added member.</returns>
     [HttpPost("{id}/members")]
     [Authorize(Roles = "Admin,Manager")]
+    [ValidateAntiForgeryToken]
     public async Task<ActionResult<ProjectMemberDto>> AddMember(Guid id, [FromBody] AddProjectMemberRequest request)
     {
         if (string.IsNullOrWhiteSpace(request.UserId))
@@ -162,6 +166,7 @@ public class ProjectsController : ControllerBase
     /// <returns>No content.</returns>
     [HttpDelete("{id}/members/{userId}")]
     [Authorize(Roles = "Admin,Manager")]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> RemoveMember(Guid id, string userId)
     {
         if (string.IsNullOrWhiteSpace(userId))
@@ -180,7 +185,7 @@ public class ProjectsController : ControllerBase
     /// <param name="slug">The project slug.</param>
     /// <returns>The project.</returns>
     [HttpGet("slug/{slug}")]
-    [AllowAnonymous]  // Allow anonymous for SEO purposes
+    [Authorize]
     public async Task<ActionResult<ProjectDto>> GetProjectBySlug(string slug)
     {
         var project = await _projectService.GetProjectBySlugAsync(slug);

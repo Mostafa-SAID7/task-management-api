@@ -25,7 +25,7 @@ public static class SharedServicesExtensions
         services.AddCors(options =>
         {
             // Development policy - allows all origins for easier testing
-            options.AddPolicy("AllowAll", builder =>
+            options.AddPolicy("Development", builder =>
             {
                 builder
                     .AllowAnyOrigin()
@@ -34,22 +34,30 @@ public static class SharedServicesExtensions
             });
 
             // Production policy - restrict to specific origins
-            options.AddPolicy("AllowSpecificOrigins", builder =>
+            options.AddPolicy("Production", builder =>
             {
+                var allowedOrigins = new[]
+                {
+                    "https://yourdomain.com",
+                    "https://www.yourdomain.com",
+                    "https://app.yourdomain.com"
+                };
+
                 builder
-                    .WithOrigins(
-                        "https://yourdomain.com",
-                        "https://www.yourdomain.com",
-                        "https://app.yourdomain.com"
-                    )
+                    .WithOrigins(allowedOrigins)
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowCredentials();
+                    .AllowCredentials()
+                    .WithExposedHeaders("X-Total-Count", "X-Page-Number", "X-Page-Size")
+                    .SetPreflightMaxAge(TimeSpan.FromHours(1));
             });
         });
 
         // Add HTTP context accessor for accessing current user context
         services.AddHttpContextAccessor();
+
+        // Add data protection for sensitive data encryption
+        services.AddDataProtection();
 
         return services;
     }
@@ -63,7 +71,13 @@ public static class SharedServicesExtensions
     {
         app.UseMiddleware<ExceptionHandlingMiddleware>();
         app.UseMiddleware<RateLimitingMiddleware>();
-        app.UseCors("AllowAll");
+        
+        // Use environment-specific CORS policy
+        var corsPolicy = app.ApplicationServices.GetRequiredService<IWebHostEnvironment>().IsProduction()
+            ? "Production"
+            : "Development";
+        app.UseCors(corsPolicy);
+        
         return app;
     }
 }

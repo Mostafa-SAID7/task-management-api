@@ -55,6 +55,10 @@ public class ProjectMemberConfiguration : IEntityTypeConfiguration<ProjectMember
         builder.HasIndex(pm => pm.UserId);
         builder.HasIndex(pm => new { pm.ProjectId, pm.UserId }).IsUnique();
         builder.HasIndex(pm => pm.IsDeleted);
+        
+        // Composite index for performance optimization
+        builder.HasIndex(pm => new { pm.ProjectId, pm.IsDeleted })
+            .HasDatabaseName("IX_ProjectMember_ProjectId_IsDeleted");
 
         // Query filter for soft delete
         builder.HasQueryFilter(pm => !pm.IsDeleted);

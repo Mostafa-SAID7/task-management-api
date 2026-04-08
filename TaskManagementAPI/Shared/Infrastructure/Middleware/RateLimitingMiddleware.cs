@@ -5,6 +5,7 @@ namespace TaskManagementAPI.Shared.Infrastructure.Middleware;
 /// <summary>
 /// Middleware for implementing rate limiting to prevent abuse and DoS attacks.
 /// Uses a sliding window approach with configurable requests per time window.
+/// Includes automatic cleanup of stale entries to prevent memory leaks.
 /// </summary>
 public class RateLimitingMiddleware
 {
@@ -12,7 +13,9 @@ public class RateLimitingMiddleware
     private readonly ILogger<RateLimitingMiddleware> _logger;
     private readonly int _requestsPerWindow;
     private readonly TimeSpan _timeWindow;
-    private static readonly ConcurrentDictionary<string, Queue<DateTime>> _requestHistory = new();
+    private static readonly ConcurrentDictionary<string, ClientRateLimitData> _requestHistory = new();
+    private static DateTime _lastCleanup = DateTime.UtcNow;
+    private static readonly TimeSpan _cleanupInterval = TimeSpan.FromMinutes(5);
 
     /// <summary>
     /// Initializes a new instance of the RateLimitingMiddleware class.
@@ -43,8 +46,16 @@ public class RateLimitingMiddleware
             _logger.LogWarning("Rate limit exceeded for client: {ClientId}", clientId);
             context.Response.StatusCode = StatusCodes.Status429TooManyRequests;
             context.Response.ContentType = "application/json";
+            context.Response.Headers.Add("Retry-After", "60");
             await context.Response.WriteAsJsonAsync(new { error = "Rate limit exceeded. Please try again later." });
             return;
+        }
+
+        // Perform cleanup if needed
+        if (DateTime.UtcNow - _lastCleanup > _cleanupInterval)
+        {
+            CleanupStaleEntries();
+            _lastCleanup = DateTime.UtcNow;
         }
 
         await _next(context);
@@ -75,23 +86,54 @@ public class RateLimitingMiddleware
     private bool IsRequestAllowed(string clientId)
     {
         var now = DateTime.UtcNow;
-        var queue = _requestHistory.GetOrAdd(clientId, _ => new Queue<DateTime>());
+        var data = _requestHistory.AddOrUpdate(clientId,
+            new ClientRateLimitData { Requests = new Queue<DateTime>() },
+            (key, existing) => existing);
 
-        lock (queue)
+        lock (data)
         {
             // Remove old requests outside the time window
-            while (queue.Count > 0 && queue.Peek() < now - _timeWindow)
+            while (data.Requests.Count > 0 && data.Requests.Peek() < now - _timeWindow)
             {
-                queue.Dequeue();
+                data.Requests.Dequeue();
             }
 
             // Check if limit is exceeded
-            if (queue.Count >= _requestsPerWindow)
+            if (data.Requests.Count >= _requestsPerWindow)
                 return false;
 
             // Add current request
-            queue.Enqueue(now);
+            data.Requests.Enqueue(now);
+            data.LastActivity = now;
             return true;
         }
+    }
+
+    /// <summary>
+    /// Cleans up stale entries from the rate limit dictionary to prevent memory leaks.
+    /// Removes entries that haven't been accessed in the last hour.
+    /// </summary>
+    private static void CleanupStaleEntries()
+    {
+        var now = DateTime.UtcNow;
+        var staleThreshold = TimeSpan.FromHours(1);
+        var staleEntries = _requestHistory
+            .Where(kvp => now - kvp.Value.LastActivity > staleThreshold)
+            .Select(kvp => kvp.Key)
+            .ToList();
+
+        foreach (var entry in staleEntries)
+        {
+            _requestHistory.TryRemove(entry, out _);
+        }
+    }
+
+    /// <summary>
+    /// Represents rate limit data for a client.
+    /// </summary>
+    private class ClientRateLimitData
+    {
+        public Queue<DateTime> Requests { get; set; } = new();
+        public DateTime LastActivity { get; set; } = DateTime.UtcNow;
     }
 }

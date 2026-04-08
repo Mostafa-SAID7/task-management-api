@@ -26,6 +26,10 @@ public class TaskDependencyConfiguration : IEntityTypeConfiguration<TaskDependen
         // Indexes for common queries
         builder.HasIndex(d => d.TaskId);
         builder.HasIndex(d => d.BlockedByTaskId);
+        
+        // Composite index for performance optimization
+        builder.HasIndex(d => new { d.TaskId, d.BlockedByTaskId })
+            .HasDatabaseName("IX_TaskDependency_TaskId_BlockedByTaskId");
 
         // Relationships
         builder.HasOne(d => d.Task)

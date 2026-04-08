@@ -74,7 +74,7 @@ public class GenericRepository<T> : IRepository<T> where T : BaseEntity
             throw new ArgumentNullException(nameof(entity));
 
         _context.Set<T>().Update(entity);
-        await Task.CompletedTask;
+        await _context.SaveChangesAsync();
     }
 
     /// <summary>

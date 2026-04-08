@@ -182,14 +182,21 @@ public class TaskService : ITaskService
         task.UpdatedAt = DateTime.UtcNow;
 
         await _taskRepository.UpdateAsync(task);
-        await _notificationService.BroadcastAsync($"project-{task.ProjectId}", $"Task assigned: {task.Title} -> {assigneeId}");
-        await _notificationService.BroadcastAsync($"user-{assigneeId}", $"You have been assigned to task: {task.Title}");
+
+        // Parallelize broadcast notifications to improve performance
+        var broadcastTasks = new List<System.Threading.Tasks.Task>
+        {
+            _notificationService.BroadcastAsync($"project-{task.ProjectId}", $"Task assigned: {task.Title} -> {assigneeId}"),
+            _notificationService.BroadcastAsync($"user-{assigneeId}", $"You have been assigned to task: {task.Title}")
+        };
 
         // Notify project manager if critical priority
         if (task.Priority == TaskPriority.Critical)
         {
-            await _notificationService.BroadcastAsync($"project-{task.ProjectId}", $"CRITICAL: Task assigned: {task.Title}");
+            broadcastTasks.Add(_notificationService.BroadcastAsync($"project-{task.ProjectId}", $"CRITICAL: Task assigned: {task.Title}"));
         }
+
+        await System.Threading.Tasks.Task.WhenAll(broadcastTasks);
 
         return task;
     }

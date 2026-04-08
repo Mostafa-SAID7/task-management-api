@@ -31,7 +31,8 @@ public class TasksController : ControllerBase
     /// <param name="request">The create task request.</param>
     /// <returns>The created task.</returns>
     [HttpPost]
-    [AllowAnonymous]  // Allow anonymous for testing purposes
+    [Authorize]
+    [ValidateAntiForgeryToken]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -75,6 +76,8 @@ public class TasksController : ControllerBase
     /// <param name="request">The update task request.</param>
     /// <returns>The updated task.</returns>
     [HttpPut("{id}")]
+    [Authorize]
+    [ValidateAntiForgeryToken]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -102,6 +105,8 @@ public class TasksController : ControllerBase
     /// <param name="id">The task ID.</param>
     /// <returns>No content.</returns>
     [HttpDelete("{id}")]
+    [Authorize]
+    [ValidateAntiForgeryToken]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteTask(Guid id)
@@ -114,7 +119,7 @@ public class TasksController : ControllerBase
     }
 
     /// <summary>
-    /// Gets tasks for a project with optional filters.
+    /// Gets tasks for a project with optional filters and pagination.
     /// </summary>
     /// <param name="projectId">The project ID.</param>
     /// <param name="status">Optional status filter.</param>
@@ -124,7 +129,7 @@ public class TasksController : ControllerBase
     /// <param name="pageSize">The page size (default 20).</param>
     /// <returns>A paginated list of tasks.</returns>
     [HttpGet("project/{projectId}")]
-    [AllowAnonymous]  // Allow anonymous for testing purposes
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async System.Threading.Tasks.Task<ActionResult<TaskListResponse>> GetProjectTasks(
@@ -178,6 +183,8 @@ public class TasksController : ControllerBase
     /// <param name="request">The update status request.</param>
     /// <returns>The updated task.</returns>
     [HttpPut("{id}/status")]
+    [Authorize]
+    [ValidateAntiForgeryToken]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -204,6 +211,8 @@ public class TasksController : ControllerBase
     /// <param name="request">The assign task request.</param>
     /// <returns>The updated task.</returns>
     [HttpPut("{id}/assignee")]
+    [Authorize]
+    [ValidateAntiForgeryToken]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<TaskDto>> AssignTask(Guid id, [FromBody] AssignTaskRequest request)
@@ -222,6 +231,8 @@ public class TasksController : ControllerBase
     /// <param name="request">The add time tracking request.</param>
     /// <returns>The created time tracking entry.</returns>
     [HttpPost("{id}/time-entries")]
+    [Authorize]
+    [ValidateAntiForgeryToken]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -246,6 +257,8 @@ public class TasksController : ControllerBase
     /// <param name="request">The add dependency request.</param>
     /// <returns>The created dependency.</returns>
     [HttpPost("{id}/dependencies")]
+    [Authorize]
+    [ValidateAntiForgeryToken]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -273,7 +286,7 @@ public class TasksController : ControllerBase
     /// <param name="slug">The task slug.</param>
     /// <returns>The task.</returns>
     [HttpGet("project/{projectId}/slug/{slug}")]
-    [AllowAnonymous]  // Allow anonymous for testing purposes
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<TaskDto>> GetTaskBySlug(Guid projectId, string slug)
