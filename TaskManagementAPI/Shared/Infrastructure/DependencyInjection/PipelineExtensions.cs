@@ -96,7 +96,7 @@ public static class PipelineExtensions
     }
 
     /// <summary>
-    /// Configures 404 handling for non-API routes (SPA compatibility).
+    /// Configures 404 handling for non-API routes.
     /// </summary>
     private static void ConfigureNotFoundHandling(IApplicationBuilder app)
     {
@@ -106,16 +106,7 @@ public static class PipelineExtensions
         if (env.IsEnvironment("Testing"))
             return;
 
-        app.Use(async (context, next) =>
-        {
-            await next();
-            
-            // If response is 404 and not an API route, serve 404.html
-            if (context.Response.StatusCode == 404 && !context.Request.Path.StartsWithSegments("/api"))
-            {
-                context.Request.Path = "/404.html";
-                await next();
-            }
-        });
+        // 404 handling is handled by asp.net core default behavior
+        // Custom routes are managed by individual controllers
     }
 }
