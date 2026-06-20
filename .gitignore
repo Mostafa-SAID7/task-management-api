@@ -40,7 +40,7 @@ coverage.opencover.xml
 .env
 .env.local
 appsettings.Development.json
-appsettings.Production.json
+# appsettings.Production.json (allow this template in repo)
 
 # Database
 *.mdf

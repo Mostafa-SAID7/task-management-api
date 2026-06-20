@@ -1,7 +1,7 @@
 # Multi-stage build for Task Management API
 
 # Stage 1: Build
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
 # Copy solution and project files
@@ -22,7 +22,7 @@ FROM build AS publish
 RUN dotnet publish "TaskManagementAPI/TaskManagementAPI.csproj" -c Release -o /app/publish
 
 # Stage 3: Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
 
 # Install curl for health checks

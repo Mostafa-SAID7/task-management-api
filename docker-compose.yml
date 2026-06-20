@@ -1,22 +1,22 @@
 version: '3.8'
 
 services:
-  # SQL Server Database
-  sql-server:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
     container_name: task-management-db
     environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "YourPassword123!"
-      MSSQL_PID: "Developer"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: taskmanagementdb
     ports:
-      - "1433:1433"
+      - "5432:5432"
     volumes:
-      - sqlserver-data:/var/opt/mssql
+      - postgres-data:/var/lib/postgresql/data
     networks:
       - task-management-network
     healthcheck:
-      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "YourPassword123!", "-Q", "SELECT 1"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -30,8 +30,8 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:80
-      ConnectionStrings__DefaultConnection: "Server=sql-server,1433;Database=TaskManagementAPI;User Id=sa;Password=YourPassword123!;TrustServerCertificate=true;"
-      Jwt__Secret: "your-super-secret-key-that-is-at-least-32-characters-long-for-hs256"
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=taskmanagementdb;Username=postgres;Password=postgres;SSL Mode=Disable"
+      Jwt__Key: "your-super-secret-key-minimum-32-characters-change-this-in-production"
       Jwt__Issuer: "TaskManagementAPI"
       Jwt__Audience: "TaskManagementAPI"
       Jwt__ExpirationMinutes: "60"
@@ -40,7 +40,7 @@ services:
     ports:
       - "5000:80"
     depends_on:
-      sql-server:
+      postgres:
         condition: service_healthy
     networks:
       - task-management-network
@@ -53,8 +53,22 @@ services:
       retries: 3
       start_period: 10s
 
+  # pgAdmin for database management (optional)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: task-management-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@taskmanagement.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    networks:
+      - task-management-network
+    depends_on:
+      - postgres
+
 volumes:
-  sqlserver-data:
+  postgres-data:
     driver: local
 
 networks:

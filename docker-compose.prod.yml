@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database (Production)
+  postgres:
+    image: postgres:16-alpine
+    container_name: task-management-db-prod
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: taskmanagementdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data-prod:/var/lib/postgresql/data
+    networks:
+      - task-management-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1G
+        reservations:
+          cpus: '1'
+          memory: 512M
+
+  # Task Management API (Production)
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: task-management-api-prod
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:80
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=taskmanagementdb;Username=${DB_USER};Password=${DB_PASSWORD};SSL Mode=Require"
+      Jwt__Key: ${JWT_KEY}
+      Jwt__Issuer: "TaskManagementAPI"
+      Jwt__Audience: "TaskManagementAPI"
+      Jwt__ExpirationMinutes: "60"
+      Logging__LogLevel__Default: "Warning"
+      Logging__LogLevel__Microsoft: "Error"
+    ports:
+      - "5000:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - task-management-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1G
+        reservations:
+          cpus: '1'
+          memory: 512M
+
+volumes:
+  postgres-data-prod:
+    driver: local
+
+networks:
+  task-management-network:
+    driver: bridge

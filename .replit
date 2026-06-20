@@ -1,4 +1,5 @@
-modules = ["dotnet-7.0", "web", "nodejs-20", "dotnet-9.0"]
+modules = ["dotnet-9.0", "web", "postgresql"]
+
 [agent]
 expertMode = true
 stack = "BEST_EFFORT_FALLBACK"
@@ -6,21 +7,32 @@ stack = "BEST_EFFORT_FALLBACK"
 [nix]
 channel = "stable-25_05"
 
+# Environment variables for local development
+[env]
+ASPNETCORE_ENVIRONMENT = "Development"
+ASPNETCORE_URLS = "http://0.0.0.0:5000"
+ConnectionStrings__DefaultConnection = "Host=localhost;Port=5432;Database=taskmanagementdb;Username=postgres;Password=postgres;SSL Mode=Disable"
+Jwt__Key = "your-super-secret-key-minimum-32-characters-change-this-in-production"
+Jwt__Issuer = "TaskManagementAPI"
+Jwt__Audience = "TaskManagementAPI"
+Jwt__ExpirationMinutes = "60"
+
+# Simplified workflow for Replit
 [workflows]
-runButton = "Project"
+runButton = "Run API"
 
 [[workflows.workflow]]
-name = "Project"
-mode = "parallel"
+name = "Run API"
+mode = "sequential"
 author = "agent"
 
 [[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Start application"
+task = "shell.exec"
+args = "cd TaskManagementAPI && dotnet restore"
 
-[[workflows.workflow]]
-name = "Start application"
-author = "agent"
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd TaskManagementAPI && dotnet build"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -30,11 +42,23 @@ waitForPort = 5000
 [workflows.workflow.metadata]
 outputType = "webview"
 
+# Port configuration - Main API
 [[ports]]
 localPort = 5000
 externalPort = 80
+description = "Task Management API"
+expose = true
 
+# Deployment configuration for Replit
 [deployment]
 deploymentTarget = "autoscale"
-run = ["dotnet", "run", "--project", "TaskManagementAPI", "--launch-profile", "http"]
-build = ["dotnet", "build", "TaskManagementAPI", "-c", "Release"]
+run = [
+  "dotnet",
+  "run",
+  "--project",
+  "TaskManagementAPI",
+  "--launch-profile",
+  "http",
+  "--urls",
+  "http://0.0.0.0:5000"
+]
