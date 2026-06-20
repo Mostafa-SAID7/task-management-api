@@ -29,7 +29,55 @@ builder.Host.UseSerilog();
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Program).Assembly);
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Task Management API",
+        Version = "v1",
+        Description = "Comprehensive task management system with project collaboration, real-time updates, and audit logging",
+        Contact = new OpenApiContact
+        {
+            Name = "API Support",
+            Email = "support@taskmanagement.api"
+        },
+        License = new OpenApiLicense
+        {
+            Name = "MIT License",
+            Url = new Uri("https://opensource.org/licenses/MIT")
+        }
+    });
+
+    // Add JWT authentication to Swagger
+    var securityScheme = new OpenApiSecurityScheme
+    {
+        Name = "JWT Authentication",
+        Description = "JWT Bearer token authentication. Example: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Reference = new OpenApiReference
+        {
+            Id = "Bearer",
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    c.AddSecurityDefinition("Bearer", securityScheme);
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { securityScheme, new List<string>() }
+    });
+
+    // Include XML comments if available
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (System.IO.File.Exists(xmlPath))
+    {
+        c.IncludeXmlComments(xmlPath);
+    }
+});
 
 // Configure JWT Authentication
 var jwtKey = builder.Configuration["Jwt:Key"];
@@ -175,25 +223,43 @@ catch (Exception ex)
 }
 
 // Configure the HTTP request pipeline
-// Configure the HTTP request pipeline
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+// Enable Swagger only in Development and Staging environments
+if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Staging"))
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Task Management API v1");
-    c.RoutePrefix = "swagger";
-    c.InjectStylesheet("/swagger-nav.css");
-    c.InjectJavascript("/swagger-nav.js");
-});
+    app.UseSwagger();
+    
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Task Management API v1");
+        c.RoutePrefix = "swagger";
+        c.DisplayOperationId();
+        c.DefaultModelExpandDepth(2);
+        c.DefaultModelsExpandDepth(1);
+        
+        // Custom styling
+        c.InjectStylesheet("/swagger-nav.css");
+        c.InjectJavascript("/swagger-nav.js");
+        
+        // Disable try-it-out in production
+        if (!app.Environment.IsDevelopment())
+        {
+            c.SupportedSubmitMethods();
+        }
+    });
+}
 
 
 app.MapControllers();
 app.UseSharedMiddleware();
+
+// Security middleware - apply before other middleware
 app.UseHttpsRedirection();
 
-// Add HSTS for HTTPS enforcement
+// Add HSTS for HTTPS enforcement in production/staging
 if (!app.Environment.IsDevelopment())
 {
     app.UseHsts();
+    app.UseExceptionHandler("/error");
 }
 
 app.UseAntiforgery();
@@ -205,6 +271,23 @@ var defaultFilesOptions = new DefaultFilesOptions();
 defaultFilesOptions.DefaultFileNames.Clear();
 defaultFilesOptions.DefaultFileNames.Add("index.html");
 app.UseDefaultFiles(defaultFilesOptions);
+
+// Add security headers for static files
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/api"))
+    {
+        context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+        context.Response.Headers.Add("X-Frame-Options", "DENY");
+        context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
+        if (!app.Environment.IsDevelopment())
+        {
+            context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+        }
+    }
+    await next();
+});
+
 app.UseStaticFiles();
 
 // Handle 404 errors for non-API routes (skip in Testing environment to avoid redirect issues)
@@ -222,6 +305,30 @@ if (!app.Environment.IsEnvironment("Testing"))
         }
     });
 }
+
+// Health check endpoint
+app.MapGet("/health", (ILogger<Program> logger) =>
+{
+    var health = new
+    {
+        status = "healthy",
+        timestamp = DateTime.UtcNow.ToString("o"),
+        environment = app.Environment.EnvironmentName,
+        version = "1.0.0",
+        uptime = Environment.TickCount / 1000.0
+    };
+    logger.LogInformation("Health check: {Status}", health.status);
+    return Results.Ok(health);
+})
+.Produces(StatusCodes.Status200OK)
+.WithName("Health")
+.AllowAnonymous();
+
+// Ready endpoint (for Kubernetes readiness probes)
+app.MapGet("/ready", () => Results.Ok(new { ready = true }))
+.Produces(StatusCodes.Status200OK)
+.WithName("Ready")
+.AllowAnonymous();
 
 app.Run();
 
