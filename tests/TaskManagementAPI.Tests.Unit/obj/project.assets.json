@@ -5600,19 +5600,19 @@
     ]
   },
   "packageFolders": {
-    "/home/runner/.nuget/packages/": {}
+    "C:\\Users\\Memo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/runner/workspace/tests/TaskManagementAPI.Tests.Unit/TaskManagementAPI.Tests.Unit.csproj",
+      "projectUniqueName": "C:\\Users\\Memo\\Downloads\\New folder\\New folder (2)\\task-management-api\\tests\\TaskManagementAPI.Tests.Unit\\TaskManagementAPI.Tests.Unit.csproj",
       "projectName": "TaskManagementAPI.Tests.Unit",
-      "projectPath": "/home/runner/workspace/tests/TaskManagementAPI.Tests.Unit/TaskManagementAPI.Tests.Unit.csproj",
-      "packagesPath": "/home/runner/.nuget/packages/",
-      "outputPath": "/home/runner/workspace/tests/TaskManagementAPI.Tests.Unit/obj/",
+      "projectPath": "C:\\Users\\Memo\\Downloads\\New folder\\New folder (2)\\task-management-api\\tests\\TaskManagementAPI.Tests.Unit\\TaskManagementAPI.Tests.Unit.csproj",
+      "packagesPath": "C:\\Users\\Memo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Memo\\Downloads\\New folder\\New folder (2)\\task-management-api\\tests\\TaskManagementAPI.Tests.Unit\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/runner/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Memo\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -5624,8 +5624,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/home/runner/workspace/TaskManagementAPI/TaskManagementAPI.csproj": {
-              "projectPath": "/home/runner/workspace/TaskManagementAPI/TaskManagementAPI.csproj"
+            "C:\\Users\\Memo\\Downloads\\New folder\\New folder (2)\\task-management-api\\TaskManagementAPI\\TaskManagementAPI.csproj": {
+              "projectPath": "C:\\Users\\Memo\\Downloads\\New folder\\New folder (2)\\task-management-api\\TaskManagementAPI\\TaskManagementAPI.csproj"
             }
           }
         }
@@ -5699,7 +5699,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/nix/store/j0v4f7ymz8jq1p2aj9jf84bfasrmmz3s-dotnet-sdk-9.0.308/share/dotnet/sdk/9.0.308/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
@@ -5707,7 +5707,7 @@
     {
       "code": "NU1605",
       "level": "Error",
-      "message": "Warning As Error: Detected package downgrade: Microsoft.EntityFrameworkCore from 9.0.4 to 9.0.0. Reference the package directly from the project to select a different version. \n TaskManagementAPI.Tests.Unit -> TaskManagementAPI -> Microsoft.EntityFrameworkCore (>= 9.0.4) \n TaskManagementAPI.Tests.Unit -> Microsoft.EntityFrameworkCore (>= 9.0.0)",
+      "message": "Warning As Error: Detected package downgrade: Microsoft.EntityFrameworkCore from 9.0.4 to 9.0.0. Reference the package directly from the project to select a different version. \r\n TaskManagementAPI.Tests.Unit -> TaskManagementAPI -> Microsoft.EntityFrameworkCore (>= 9.0.4) \r\n TaskManagementAPI.Tests.Unit -> Microsoft.EntityFrameworkCore (>= 9.0.0)",
       "libraryId": "Microsoft.EntityFrameworkCore",
       "targetGraphs": [
         "net9.0"

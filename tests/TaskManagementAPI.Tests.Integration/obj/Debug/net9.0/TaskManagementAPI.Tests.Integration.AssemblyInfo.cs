@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TaskManagementAPI.Tests.Integration")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e86770f09ef1476e56b3c838641cf352cc4950d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5fbab54f0c28fa19682d12808d2c28ebffc253e9")]
 [assembly: System.Reflection.AssemblyProductAttribute("TaskManagementAPI.Tests.Integration")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TaskManagementAPI.Tests.Integration")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
