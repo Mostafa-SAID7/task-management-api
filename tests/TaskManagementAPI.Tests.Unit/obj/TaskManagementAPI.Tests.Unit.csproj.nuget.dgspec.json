@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Memo\\Downloads\\New folder (8)\\tests\\TaskManagementAPI.Tests.Unit\\TaskManagementAPI.Tests.Unit.csproj": {}
+    "/home/runner/workspace/tests/TaskManagementAPI.Tests.Unit/TaskManagementAPI.Tests.Unit.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Memo\\Downloads\\New folder (8)\\TaskManagementAPI\\TaskManagementAPI.csproj": {
+    "/home/runner/workspace/TaskManagementAPI/TaskManagementAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Memo\\Downloads\\New folder (8)\\TaskManagementAPI\\TaskManagementAPI.csproj",
+        "projectUniqueName": "/home/runner/workspace/TaskManagementAPI/TaskManagementAPI.csproj",
         "projectName": "TaskManagementAPI",
-        "projectPath": "C:\\Users\\Memo\\Downloads\\New folder (8)\\TaskManagementAPI\\TaskManagementAPI.csproj",
-        "packagesPath": "C:\\Users\\Memo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Memo\\Downloads\\New folder (8)\\TaskManagementAPI\\obj\\",
+        "projectPath": "/home/runner/workspace/TaskManagementAPI/TaskManagementAPI.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/workspace/TaskManagementAPI/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Memo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/runner/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -56,19 +50,19 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.0.4, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.0.4, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.0.4, )"
             },
             "Serilog": {
               "target": "Package",
@@ -110,40 +104,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/nix/store/j0v4f7ymz8jq1p2aj9jf84bfasrmmz3s-dotnet-sdk-9.0.308/share/dotnet/sdk/9.0.308/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Memo\\Downloads\\New folder (8)\\tests\\TaskManagementAPI.Tests.Unit\\TaskManagementAPI.Tests.Unit.csproj": {
+    "/home/runner/workspace/tests/TaskManagementAPI.Tests.Unit/TaskManagementAPI.Tests.Unit.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Memo\\Downloads\\New folder (8)\\tests\\TaskManagementAPI.Tests.Unit\\TaskManagementAPI.Tests.Unit.csproj",
+        "projectUniqueName": "/home/runner/workspace/tests/TaskManagementAPI.Tests.Unit/TaskManagementAPI.Tests.Unit.csproj",
         "projectName": "TaskManagementAPI.Tests.Unit",
-        "projectPath": "C:\\Users\\Memo\\Downloads\\New folder (8)\\tests\\TaskManagementAPI.Tests.Unit\\TaskManagementAPI.Tests.Unit.csproj",
-        "packagesPath": "C:\\Users\\Memo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Memo\\Downloads\\New folder (8)\\tests\\TaskManagementAPI.Tests.Unit\\obj\\",
+        "projectPath": "/home/runner/workspace/tests/TaskManagementAPI.Tests.Unit/TaskManagementAPI.Tests.Unit.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/workspace/tests/TaskManagementAPI.Tests.Unit/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Memo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/runner/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Memo\\Downloads\\New folder (8)\\TaskManagementAPI\\TaskManagementAPI.csproj": {
-                "projectPath": "C:\\Users\\Memo\\Downloads\\New folder (8)\\TaskManagementAPI\\TaskManagementAPI.csproj"
+              "/home/runner/workspace/TaskManagementAPI/TaskManagementAPI.csproj": {
+                "projectPath": "/home/runner/workspace/TaskManagementAPI/TaskManagementAPI.csproj"
               }
             }
           }
@@ -217,7 +205,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/nix/store/j0v4f7ymz8jq1p2aj9jf84bfasrmmz3s-dotnet-sdk-9.0.308/share/dotnet/sdk/9.0.308/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
