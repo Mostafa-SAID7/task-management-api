@@ -1,118 +1,75 @@
 using System.Diagnostics;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+using System.Security.Claims;
+using Serilog.Context;
 
 namespace TaskManagementAPI.Shared.Infrastructure.Middleware;
 
 /// <summary>
-/// Middleware for structured logging of HTTP requests and responses.
-/// Logs request details, response status, and execution time with context information.
+/// Middleware for structured HTTP request/response logging via Serilog.
+/// Enriches every log line in the request scope with RequestId, UserId,
+/// HTTP Method, Path, and response duration — enabling full correlation
+/// across all log sinks (console, file, audit).
 /// </summary>
 public class LoggingMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly ILogger<LoggingMiddleware> _logger;
 
-    /// <summary>
-    /// Initializes a new instance of the LoggingMiddleware class.
-    /// </summary>
-    /// <param name="next">The next middleware in the pipeline.</param>
-    /// <param name="logger">The logger instance.</param>
-    public LoggingMiddleware(RequestDelegate next, ILogger<LoggingMiddleware> logger)
+    public LoggingMiddleware(RequestDelegate next)
     {
         _next = next;
-        _logger = logger;
     }
 
-    /// <summary>
-    /// Invokes the middleware to log HTTP requests and responses.
-    /// </summary>
-    /// <param name="context">The HTTP context.</param>
     public async Task InvokeAsync(HttpContext context)
     {
-        var requestId = context.Request.Headers.TryGetValue("X-Request-ID", out var requestIdHeader)
-            ? requestIdHeader.ToString()
+        var requestId = context.Request.Headers.TryGetValue("X-Request-ID", out var header)
+            ? header.ToString()
             : context.TraceIdentifier;
 
-        var userId = context.User?.FindFirst("sub")?.Value ?? "anonymous";
+        var userId = context.User?.FindFirst("sub")?.Value
+            ?? context.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value
+            ?? "anonymous";
 
+        var method = context.Request.Method;
+        var path   = context.Request.Path.Value ?? "/";
+        var ip     = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+        // Push properties into Serilog's real LogContext — every log statement
+        // emitted within this using block will carry these enrichment keys.
         using (LogContext.PushProperty("RequestId", requestId))
-        using (LogContext.PushProperty("UserId", userId))
-        using (LogContext.PushProperty("Timestamp", DateTime.UtcNow))
+        using (LogContext.PushProperty("UserId",    userId))
+        using (LogContext.PushProperty("ClientIp",  ip))
         {
-            var stopwatch = Stopwatch.StartNew();
+            var sw = Stopwatch.StartNew();
 
-            _logger.LogInformation(
-                "HTTP Request: {Method} {Path} from {RemoteIP}",
-                context.Request.Method,
-                context.Request.Path,
-                context.Connection.RemoteIpAddress);
-
-            var originalBodyStream = context.Response.Body;
+            Log.Information(
+                "→ {Method} {Path} | IP={ClientIp} | User={UserId} | Req={RequestId}",
+                method, path, ip, userId, requestId);
 
             try
             {
                 await _next(context);
 
-                stopwatch.Stop();
+                sw.Stop();
 
-                _logger.LogInformation(
-                    "HTTP Response: {Method} {Path} - Status {StatusCode} - Duration {ElapsedMilliseconds}ms",
-                    context.Request.Method,
-                    context.Request.Path,
-                    context.Response.StatusCode,
-                    stopwatch.ElapsedMilliseconds);
+                var statusCode = context.Response.StatusCode;
+                var level      = statusCode >= 500 ? Serilog.Events.LogEventLevel.Error
+                               : statusCode >= 400 ? Serilog.Events.LogEventLevel.Warning
+                               :                     Serilog.Events.LogEventLevel.Information;
+
+                Log.Write(level,
+                    "← {Method} {Path} | {StatusCode} | {ElapsedMs}ms | User={UserId}",
+                    method, path, statusCode, sw.ElapsedMilliseconds, userId);
             }
             catch (Exception ex)
             {
-                stopwatch.Stop();
+                sw.Stop();
 
-                _logger.LogError(ex,
-                    "HTTP Request failed: {Method} {Path} - Duration {ElapsedMilliseconds}ms",
-                    context.Request.Method,
-                    context.Request.Path,
-                    stopwatch.ElapsedMilliseconds);
+                Log.Error(ex,
+                    "✗ {Method} {Path} | EXCEPTION after {ElapsedMs}ms | User={UserId}",
+                    method, path, sw.ElapsedMilliseconds, userId);
 
                 throw;
             }
-            finally
-            {
-                context.Response.Body = originalBodyStream;
-            }
-        }
-    }
-}
-
-/// <summary>
-/// Helper class for managing log context properties.
-/// </summary>
-public static class LogContext
-{
-    /// <summary>
-    /// Pushes a property into the log context.
-    /// </summary>
-    /// <param name="name">The property name.</param>
-    /// <param name="value">The property value.</param>
-    /// <returns>A disposable that removes the property when disposed.</returns>
-    public static IDisposable PushProperty(string name, object? value)
-    {
-        return new LogContextProperty(name, value);
-    }
-
-    private class LogContextProperty : IDisposable
-    {
-        private readonly string _name;
-
-        public LogContextProperty(string name, object? value)
-        {
-            _name = name;
-            // In a real implementation, this would integrate with Serilog's LogContext
-            // For now, this is a placeholder for the middleware structure
-        }
-
-        public void Dispose()
-        {
-            // Cleanup
         }
     }
 }

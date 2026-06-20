@@ -1,0 +1,5 @@
+- [Dev connection string bug](dev-connection-string.md) — appsettings.Development.json had SQL Server connection string overriding PostgreSQL; all migrations silently failed until fixed.
+- [Tasks migration schema issue](tasks-migration-schema.md) — TasksModuleExtensions used custom "Tasks" schema for MigrationsHistoryTable; schema never auto-creates in PostgreSQL.
+- [Users migration GETUTCDATE](users-migration-getutcdate.md) — Users InitialCreate had GETUTCDATE() (SQL Server only); must be NOW() in migration + DbContext + snapshot.
+- [LoggingMiddleware fake LogContext](logging-middleware-fix.md) — LoggingMiddleware had a stub LogContext class that silently discarded all enrichment; replaced with real Serilog.Context.LogContext.
+- [Audit actor fields pattern](audit-actor-fields.md) — BaseEntity has CreatedBy/UpdatedBy/DeletedBy; ICurrentUserService resolves actor from JWT sub/NameIdentifier; BaseDbContext stamps on every save.

@@ -2,34 +2,64 @@ namespace TaskManagementAPI.Shared.Domain;
 
 /// <summary>
 /// Abstract base class for all domain entities.
-/// Provides common properties for entity identification, audit tracking, and soft deletion.
+/// Provides GUID identity, full UTC audit timestamps, actor tracking,
+/// and soft-delete support as cross-cutting concerns.
 /// </summary>
 public abstract class BaseEntity
 {
+    // ─── Identity ────────────────────────────────────────────────────────────
+
     /// <summary>
-    /// Unique identifier for the entity.
+    /// Unique identifier (auto-generated GUID v4 on construction).
     /// </summary>
     public Guid Id { get; set; } = Guid.NewGuid();
 
+    // ─── Audit timestamps ────────────────────────────────────────────────────
+
     /// <summary>
-    /// Timestamp when the entity was created (UTC).
+    /// UTC timestamp when the entity was first persisted.
+    /// Set automatically by BaseDbContext on insert.
     /// </summary>
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     /// <summary>
-    /// Timestamp when the entity was last updated (UTC).
-    /// Null if the entity has never been updated.
+    /// UTC timestamp of the most recent modification.
+    /// Null until the entity is updated at least once.
     /// </summary>
     public DateTime? UpdatedAt { get; set; }
 
+    // ─── Audit actors ─────────────────────────────────────────────────────────
+
     /// <summary>
-    /// Indicates whether the entity has been soft-deleted.
+    /// User ID who created this entity.
+    /// Null for system-generated records or unauthenticated requests.
+    /// </summary>
+    public string? CreatedBy { get; set; }
+
+    /// <summary>
+    /// User ID who last modified this entity.
+    /// Null until the entity has been updated at least once.
+    /// </summary>
+    public string? UpdatedBy { get; set; }
+
+    // ─── Soft delete ─────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Marks the entity as logically deleted.
+    /// Soft-deleted entities are excluded from all standard queries
+    /// via a global EF Core query filter applied in BaseDbContext.
     /// </summary>
     public bool IsDeleted { get; set; } = false;
 
     /// <summary>
-    /// Timestamp when the entity was soft-deleted (UTC).
-    /// Null if the entity has not been deleted.
+    /// UTC timestamp when the entity was soft-deleted.
+    /// Null until IsDeleted is set to true.
     /// </summary>
     public DateTime? DeletedAt { get; set; }
+
+    /// <summary>
+    /// User ID who performed the soft-delete.
+    /// Null until the entity is deleted.
+    /// </summary>
+    public string? DeletedBy { get; set; }
 }

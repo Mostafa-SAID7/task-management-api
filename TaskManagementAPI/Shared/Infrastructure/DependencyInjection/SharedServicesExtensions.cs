@@ -1,81 +1,75 @@
+using TaskManagementAPI.Shared.Application.Services;
+using TaskManagementAPI.Shared.Domain.Interfaces;
 using TaskManagementAPI.Shared.Infrastructure.Middleware;
 using TaskManagementAPI.Shared.Infrastructure.Services;
 
 namespace TaskManagementAPI.Shared.Infrastructure.DependencyInjection;
 
 /// <summary>
-/// Extension methods for registering shared services and middleware in the DI container.
+/// Extension methods for registering shared cross-cutting services and middleware.
 /// </summary>
 public static class SharedServicesExtensions
 {
     /// <summary>
-    /// Registers all shared infrastructure services including middleware, logging, and common utilities.
-    /// Configures CORS with environment-specific policies for security.
+    /// Registers all shared infrastructure services:
+    /// HTTP context accessor, current-user service, notification service, and CORS.
     /// </summary>
-    /// <param name="services">The service collection.</param>
-    /// <returns>The service collection for chaining.</returns>
     public static IServiceCollection AddSharedServices(this IServiceCollection services)
     {
-        // Register notification service
+        // HTTP context accessor — required by CurrentUserService and other infra
+        services.AddHttpContextAccessor();
+
+        // Current-user resolution for audit actor tracking in DbContexts and repos
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+        // Notification fanout service
         services.AddScoped<INotificationService, NotificationService>();
 
-        // Add CORS with environment-specific configuration
+        // Data protection for sensitive values
+        services.AddDataProtection();
+
+        // CORS — development allows any origin; production restricts to known hosts
         services.AddCors(options =>
         {
-            // Development policy - allows all origins for easier testing
-            options.AddPolicy("Development", builder =>
-            {
-                builder
-                    .AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            });
+            options.AddPolicy("Development", policy =>
+                policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-            // Production policy - restrict to specific origins
-            options.AddPolicy("Production", builder =>
-            {
-                var allowedOrigins = new[]
-                {
-                    "https://yourdomain.com",
-                    "https://www.yourdomain.com",
-                    "https://app.yourdomain.com"
-                };
-
-                builder
-                    .WithOrigins(allowedOrigins)
+            options.AddPolicy("Production", policy =>
+                policy
+                    .WithOrigins(
+                        "https://yourdomain.com",
+                        "https://www.yourdomain.com",
+                        "https://app.yourdomain.com")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
                     .WithExposedHeaders("X-Total-Count", "X-Page-Number", "X-Page-Size")
-                    .SetPreflightMaxAge(TimeSpan.FromHours(1));
-            });
+                    .SetPreflightMaxAge(TimeSpan.FromHours(1)));
         });
-
-        // Add HTTP context accessor for accessing current user context
-        services.AddHttpContextAccessor();
-
-        // Add data protection for sensitive data encryption
-        services.AddDataProtection();
 
         return services;
     }
 
     /// <summary>
     /// Registers middleware in the application pipeline.
+    /// Order matters: logging first so every subsequent middleware is covered,
+    /// then exception handling, rate limiting, and CORS.
     /// </summary>
-    /// <param name="app">The application builder.</param>
-    /// <returns>The application builder for chaining.</returns>
     public static IApplicationBuilder UseSharedMiddleware(this IApplicationBuilder app)
     {
+        // Structured HTTP logging (uses real Serilog.Context enrichment)
+        app.UseMiddleware<LoggingMiddleware>();
+
+        // Centralised exception → RFC 7807 ProblemDetails conversion
         app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+        // Token-bucket rate limiting
         app.UseMiddleware<RateLimitingMiddleware>();
-        
-        // Use environment-specific CORS policy
-        var corsPolicy = app.ApplicationServices.GetRequiredService<IWebHostEnvironment>().IsProduction()
-            ? "Production"
-            : "Development";
-        app.UseCors(corsPolicy);
-        
+
+        // CORS
+        var env = app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
+        app.UseCors(env.IsProduction() ? "Production" : "Development");
+
         return app;
     }
 }

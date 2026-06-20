@@ -1,91 +1,138 @@
+using System.Linq.Expressions;
+using TaskManagementAPI.Shared.Application.Services;
 using TaskManagementAPI.Shared.Domain;
 
 namespace TaskManagementAPI.Shared.Infrastructure;
 
 /// <summary>
-/// Abstract base class for all module-specific DbContexts.
-/// Provides common configuration for soft delete query filters and entity tracking.
+/// Abstract base DbContext shared by all module DbContexts.
+///
+/// Responsibilities:
+///  1. Global soft-delete query filter — every BaseEntity-derived set
+///     automatically excludes IsDeleted = true records.
+///  2. Automatic timestamp management — CreatedAt on insert,
+///     UpdatedAt on every update, DeletedAt on soft-delete.
+///  3. Actor tracking — CreatedBy / UpdatedBy / DeletedBy resolved
+///     from ICurrentUserService and stamped on every save.
+///  4. Structured audit events — every CUD operation emits a
+///     Serilog "Audit.*" structured log event for the audit file sink.
 /// </summary>
 public abstract class BaseDbContext : DbContext
 {
-    /// <summary>
-    /// Initializes a new instance of the BaseDbContext class.
-    /// </summary>
-    /// <param name="options">The DbContext options.</param>
-    protected BaseDbContext(DbContextOptions options) : base(options)
-    {
-    }
+    private readonly ICurrentUserService? _currentUser;
 
     /// <summary>
-    /// Configures the model for the context.
-    /// Applies soft delete query filters to all entities inheriting from BaseEntity.
+    /// Constructor used when ICurrentUserService is available via DI
+    /// (standard runtime path — full audit actor support).
     /// </summary>
-    /// <param name="modelBuilder">The model builder used to construct the model for this context.</param>
+    protected BaseDbContext(DbContextOptions options, ICurrentUserService? currentUser = null)
+        : base(options)
+    {
+        _currentUser = currentUser;
+    }
+
+    // ─── Model configuration ─────────────────────────────────────────────────
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        // Apply soft delete query filter to all entities inheriting from BaseEntity
-        var entityTypes = modelBuilder.Model.GetEntityTypes()
-            .Where(e => typeof(BaseEntity).IsAssignableFrom(e.ClrType));
-
-        foreach (var entityType in entityTypes)
+        // Apply soft-delete global query filter to every BaseEntity descendant
+        // using a compiled lambda: e => !e.IsDeleted
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes()
+            .Where(e => typeof(BaseEntity).IsAssignableFrom(e.ClrType)))
         {
-            // Create a parameter for the entity type
-            var parameter = System.Linq.Expressions.Expression.Parameter(entityType.ClrType, "e");
-
-            // Create the expression: e => !e.IsDeleted
-            var isDeletedProperty = System.Linq.Expressions.Expression.Property(parameter, nameof(BaseEntity.IsDeleted));
-            var notDeleted = System.Linq.Expressions.Expression.Not(isDeletedProperty);
-            var lambda = System.Linq.Expressions.Expression.Lambda(notDeleted, parameter);
-
-            // Apply the query filter
-            modelBuilder.Entity(entityType.ClrType).HasQueryFilter(lambda);
+            var param = Expression.Parameter(entityType.ClrType, "e");
+            var isDeletedProp = Expression.Property(param, nameof(BaseEntity.IsDeleted));
+            var filter = Expression.Lambda(Expression.Not(isDeletedProp), param);
+            modelBuilder.Entity(entityType.ClrType).HasQueryFilter(filter);
         }
     }
 
-    /// <summary>
-    /// Saves all changes made in this context to the database.
-    /// Updates the UpdatedAt timestamp for modified entities.
-    /// </summary>
-    /// <param name="cancellationToken">A CancellationToken to observe while waiting for the task to complete.</param>
-    /// <returns>The number of state entries written to the database.</returns>
+    // ─── SaveChanges overrides ────────────────────────────────────────────────
+
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        UpdateTimestamps();
-        return await base.SaveChangesAsync(cancellationToken);
+        var auditEntries = StampEntities();
+        var result = await base.SaveChangesAsync(cancellationToken);
+        EmitAuditEvents(auditEntries);
+        return result;
     }
 
-    /// <summary>
-    /// Saves all changes made in this context to the database synchronously.
-    /// Updates the UpdatedAt timestamp for modified entities.
-    /// </summary>
-    /// <returns>The number of state entries written to the database.</returns>
     public override int SaveChanges()
     {
-        UpdateTimestamps();
-        return base.SaveChanges();
+        var auditEntries = StampEntities();
+        var result = base.SaveChanges();
+        EmitAuditEvents(auditEntries);
+        return result;
+    }
+
+    // ─── Private helpers ──────────────────────────────────────────────────────
+
+    private record AuditSnapshot(
+        string Action,
+        string EntityType,
+        Guid   EntityId,
+        string ActorId);
+
+    /// <summary>
+    /// Stamps all tracked BaseEntity entries with timestamps and actor IDs,
+    /// then returns lightweight audit snapshots for post-save event emission.
+    /// </summary>
+    private List<AuditSnapshot> StampEntities()
+    {
+        var now     = DateTime.UtcNow;
+        var actorId = _currentUser?.UserId ?? "system";
+        var snapshots = new List<AuditSnapshot>();
+
+        foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+        {
+            switch (entry.State)
+            {
+                case EntityState.Added:
+                    entry.Entity.CreatedAt = now;
+                    if (entry.Entity.CreatedBy is null)
+                        entry.Entity.CreatedBy = actorId;
+                    snapshots.Add(new AuditSnapshot("Created",
+                        entry.Entity.GetType().Name, entry.Entity.Id, actorId));
+                    break;
+
+                case EntityState.Modified:
+                    entry.Entity.UpdatedAt = now;
+                    entry.Entity.UpdatedBy = actorId;
+
+                    // Stamp soft-delete on the first pass that sets IsDeleted = true
+                    if (entry.Entity.IsDeleted && entry.Entity.DeletedAt is null)
+                    {
+                        entry.Entity.DeletedAt = now;
+                        entry.Entity.DeletedBy = actorId;
+                        snapshots.Add(new AuditSnapshot("Deleted",
+                            entry.Entity.GetType().Name, entry.Entity.Id, actorId));
+                    }
+                    else
+                    {
+                        snapshots.Add(new AuditSnapshot("Updated",
+                            entry.Entity.GetType().Name, entry.Entity.Id, actorId));
+                    }
+                    break;
+            }
+        }
+
+        return snapshots;
     }
 
     /// <summary>
-    /// Updates the UpdatedAt timestamp for all modified entities.
-    /// Sets DeletedAt when an entity is soft-deleted.
+    /// Emits one structured Serilog event per changed entity.
+    /// The Serilog "Audit" sink filter captures these into a separate audit log file.
     /// </summary>
-    private void UpdateTimestamps()
+    private static void EmitAuditEvents(List<AuditSnapshot> snapshots)
     {
-        var entries = ChangeTracker.Entries<BaseEntity>();
-
-        foreach (var entry in entries)
+        foreach (var s in snapshots)
         {
-            if (entry.State == EntityState.Modified)
-            {
-                entry.Entity.UpdatedAt = DateTime.UtcNow;
-            }
-
-            if (entry.State == EntityState.Modified && entry.Entity.IsDeleted && entry.Entity.DeletedAt == null)
-            {
-                entry.Entity.DeletedAt = DateTime.UtcNow;
-            }
+            Log.ForContext("IsAuditEvent", true)
+               .Information(
+                   "AUDIT {AuditAction} {EntityType} {EntityId} by {ActorId}",
+                   s.Action, s.EntityType, s.EntityId, s.ActorId);
         }
     }
 }

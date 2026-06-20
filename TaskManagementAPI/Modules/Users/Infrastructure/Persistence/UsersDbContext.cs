@@ -29,7 +29,7 @@ public class UsersDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<ApplicationUser>(entity =>
         {
             entity.Property(u => u.FullName).HasMaxLength(255);
-            entity.Property(u => u.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+            entity.Property(u => u.CreatedAt).HasDefaultValueSql("NOW()");
             entity.HasQueryFilter(u => !u.IsDeleted);
             entity.HasIndex(u => u.Email).IsUnique();
             entity.HasIndex(u => u.CreatedAt);
