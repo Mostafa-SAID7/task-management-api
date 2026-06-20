@@ -99,34 +99,72 @@ try
 {
     using (var scope = app.Services.CreateScope())
     {
-        var projectsContext = scope.ServiceProvider.GetRequiredService<ProjectsDbContext>();
-        var tasksContext = scope.ServiceProvider.GetRequiredService<TasksDbContext>();
-        var usersContext = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
-        var notificationsContext = scope.ServiceProvider.GetRequiredService<NotificationsDbContext>();
+        // Attempt to get DbContexts - wrapped in try/catch since DNS resolution failures
+        // will occur here in IPv6-only networks when constructing the contexts
+        ProjectsDbContext? projectsContext = null;
+        TasksDbContext? tasksContext = null;
+        UsersDbContext? usersContext = null;
+        NotificationsDbContext? notificationsContext = null;
+
+        try { projectsContext = scope.ServiceProvider.GetRequiredService<ProjectsDbContext>(); }
+        catch (System.Net.Sockets.SocketException ex) when (ex.ErrorCode == 11004) { }
+        catch (Exception) { }
+
+        try { tasksContext = scope.ServiceProvider.GetRequiredService<TasksDbContext>(); }
+        catch (System.Net.Sockets.SocketException ex) when (ex.ErrorCode == 11004) { }
+        catch (Exception) { }
+
+        try { usersContext = scope.ServiceProvider.GetRequiredService<UsersDbContext>(); }
+        catch (System.Net.Sockets.SocketException ex) when (ex.ErrorCode == 11004) { }
+        catch (Exception) { }
+
+        try { notificationsContext = scope.ServiceProvider.GetRequiredService<NotificationsDbContext>(); }
+        catch (System.Net.Sockets.SocketException ex) when (ex.ErrorCode == 11004) { }
+        catch (Exception) { }
 
         // Using MigrateAsync to ensure correct tracking via __EFMigrationsHistory
-        // Skip if provider is in-memory (for tests)
-        if (projectsContext.Database.IsRelational())
+        // Skip if provider is in-memory (for tests) or if context couldn't be created
+        if (projectsContext?.Database.IsRelational() == true)
         {
             try { await projectsContext.Database.MigrateAsync(); }
+            catch (System.Net.Sockets.SocketException ex) 
+            { 
+                if (ex.ErrorCode != 11004)
+                    Log.Warning(ex, "Network error migrating ProjectsDbContext"); 
+            }
             catch (Exception ex) { Log.Warning(ex, "Error migrating ProjectsDbContext"); }
         }
 
-        if (tasksContext.Database.IsRelational())
+        if (tasksContext?.Database.IsRelational() == true)
         {
             try { await tasksContext.Database.MigrateAsync(); }
+            catch (System.Net.Sockets.SocketException ex) 
+            { 
+                if (ex.ErrorCode != 11004)
+                    Log.Warning(ex, "Network error migrating TasksDbContext"); 
+            }
             catch (Exception ex) { Log.Warning(ex, "Error migrating TasksDbContext"); }
         }
 
-        if (usersContext.Database.IsRelational())
+        if (usersContext?.Database.IsRelational() == true)
         {
             try { await usersContext.Database.MigrateAsync(); }
+            catch (System.Net.Sockets.SocketException ex) 
+            { 
+                if (ex.ErrorCode != 11004)
+                    Log.Warning(ex, "Network error migrating UsersDbContext"); 
+            }
             catch (Exception ex) { Log.Warning(ex, "Error migrating UsersDbContext"); }
         }
 
-        if (notificationsContext.Database.IsRelational())
+        if (notificationsContext?.Database.IsRelational() == true)
         {
             try { await notificationsContext.Database.MigrateAsync(); }
+            catch (System.Net.Sockets.SocketException ex) 
+            { 
+                if (ex.ErrorCode != 11004)
+                    Log.Warning(ex, "Network error migrating NotificationsDbContext"); 
+            }
             catch (Exception ex) { Log.Warning(ex, "Error migrating NotificationsDbContext"); }
         }
     }
