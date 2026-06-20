@@ -42,6 +42,9 @@ coverage.opencover.xml
 appsettings.Development.json
 # appsettings.Production.json (allow this template in repo)
 
+# Supabase local
+supabase/config.toml
+
 # Database
 *.mdf
 *.ldf
