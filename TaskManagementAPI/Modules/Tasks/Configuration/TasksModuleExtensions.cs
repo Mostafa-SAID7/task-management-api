@@ -26,8 +26,8 @@ public static class TasksModuleExtensions
             ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
         services.AddDbContext<TasksDbContext>(options =>
-            options.UseSqlServer(connectionString, sqlOptions =>
-                sqlOptions.MigrationsHistoryTable("__EFMigrationsHistory", "Tasks")));
+            options.UseNpgsql(connectionString, npgsqlOptions =>
+                npgsqlOptions.MigrationsHistoryTable("__EFMigrationsHistory", "Tasks")));
 
         // Register repositories
         services.AddScoped<ITaskRepository, TaskRepository>();

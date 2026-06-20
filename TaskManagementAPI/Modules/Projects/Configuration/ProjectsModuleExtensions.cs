@@ -28,7 +28,7 @@ public static class ProjectsModuleExtensions
             ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
         services.AddDbContext<ProjectsDbContext>(options =>
-            options.UseSqlServer(connectionString));
+            options.UseNpgsql(connectionString));
 
         // Register repositories
         services.AddScoped<IProjectRepository, ProjectRepository>();

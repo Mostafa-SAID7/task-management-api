@@ -35,7 +35,7 @@ public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
             .HasDefaultValue(false);
 
         builder.Property(n => n.CreatedAt)
-            .HasDefaultValueSql("GETUTCDATE()");
+            .HasDefaultValueSql("NOW()");
 
         // Soft delete filter
         builder.HasQueryFilter(n => !n.IsDeleted);

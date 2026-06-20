@@ -21,7 +21,7 @@ public static class NotificationsModuleExtensions
     {
         // Add DbContext
         services.AddDbContext<NotificationsDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
         // Add services
         services.AddScoped<NotificationService>();

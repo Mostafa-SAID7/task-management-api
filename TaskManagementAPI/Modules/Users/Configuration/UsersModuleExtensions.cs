@@ -22,7 +22,7 @@ public static class UsersModuleExtensions
     {
         // Add DbContext
         services.AddDbContext<UsersDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
         // Add Identity
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
