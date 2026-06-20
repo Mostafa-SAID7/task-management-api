@@ -1224,20 +1224,31 @@ ul, ol { list-style: none; }
    -------------------------------------------------------------------------- */
 .stat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--sp-4);
   margin: var(--sp-8) 0;
 }
 
 .stat-card {
-  padding: var(--sp-6);
+  padding: var(--sp-5) var(--sp-4);
   text-align: center;
   border-radius: var(--r-xl);
   background: var(--c-surface);
   border: 1px solid var(--c-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  transition: border-color var(--dur-fast) var(--ease-soft),
+              box-shadow var(--dur-fast) var(--ease-soft);
+}
+.stat-card:hover {
+  border-color: rgba(139,92,246,.35);
+  box-shadow: 0 0 24px rgba(139,92,246,.08);
 }
 .stat-value {
-  font-size: var(--fs-4xl);
+  font-size: clamp(1.75rem, 3vw, var(--fs-4xl));
   font-weight: var(--fw-black);
   background: var(--grad-primary);
   -webkit-background-clip: text;
@@ -1250,7 +1261,7 @@ ul, ol { list-style: none; }
   color: var(--c-text-dim);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-top: var(--sp-2);
+  margin-top: 0;
 }
 
 /* --------------------------------------------------------------------------
@@ -1377,6 +1388,7 @@ ul, ol { list-style: none; }
   :root { --sidebar-w: 240px; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .doc-layout { gap: var(--sp-8); }
+  .stat-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* ---- Phablet (≤768px) ---- */
@@ -1427,6 +1439,7 @@ ul, ol { list-style: none; }
   .sidebar-section-title:not(:first-child) { margin-top: var(--sp-4); }
 
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
 
   .hero { min-height: auto; padding: var(--sp-16) var(--sp-4) var(--sp-12); }
   .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
@@ -1453,6 +1466,7 @@ ul, ol { list-style: none; }
   .code-block code { font-size: var(--fs-xs); }
 
   .stat-value { font-size: var(--fs-3xl); }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
   .grid-auto-2, .grid-auto-3, .grid-auto-4 {
     grid-template-columns: 1fr;
   }

@@ -143,6 +143,8 @@ app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Task Management API v1");
     c.RoutePrefix = "swagger";
+    c.InjectStylesheet("/swagger-nav.css");
+    c.InjectJavascript("/swagger-nav.js");
 });
 
 
